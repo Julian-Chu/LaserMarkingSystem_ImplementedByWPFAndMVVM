@@ -1,0 +1,201 @@
+﻿<Window x:Class="ProgramNoSetting.View.ProgramNoSettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ProgramNoSetting.View"
+        xmlns:Conditions="clr-namespace:ProgramNoSetting.Protocol"
+        Title="ProgramNoSettingWindow" Height="480" Width="510"
+        DataContext="{Binding RelativeSource={RelativeSource self}}" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="ItemStackPanelStyle" TargetType="StackPanel">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style x:Key="LabelStyle_1">
+            <Setter Property="Label.MinWidth" Value="150"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="MinWidth" Value="80"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="IsReadOnly" Value="False"/>
+        </Style>
+        <Style x:Key="ButtonStyle_1" TargetType="Button">
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+
+        <Style x:Key="ButtonStyle_2" TargetType="Button">
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="MinWidth" Value="140"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="4" Background="Wheat" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter x:Name="contentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="4" Background="Aqua" BorderBrush="Black" BorderThickness="1" Margin="-3">
+                                    <ContentPresenter x:Name="contentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}" 
+                                                  />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="IsReadOnly" Value="True"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="FirstProgramNo" Content="|&lt;" Grid.Column="0" Style="{StaticResource ButtonStyle_1}" Click="FirstProgramNo_Click"/>
+            <Button x:Name="Decrement" Content="&lt;"  Grid.Column="1"  Style="{StaticResource ButtonStyle_1}"  Click="Decrement_Click" />
+            <TextBox x:Name="TBProgramNumber" Text="{Binding Path=ProgramNo, Mode=OneTime}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="2"  Margin="3,5,3,5" FontSize="16" TextAlignment="Center" IsReadOnly="False" TextChanged="TBProgramNumber_TextChanged" />
+            <Button x:Name="Increment" Content="&gt;" Grid.Column="3" Click="Increment_Click" Style="{StaticResource ButtonStyle_1}"  />
+            <Button x:Name="LastProgramNo" Content="&gt;|" Grid.Column="4" Style="{StaticResource ButtonStyle_1}" Click="LastProgramNo_Click"/>
+        </Grid>
+        <Button x:Name="DownloadFromController" Content="Download Program Parameter"  Grid.Column="0" Style="{StaticResource ButtonStyle_2}" Click="DownloadFromController_Click"/>
+        <Button x:Name="Cancel" IsCancel="True" Content="Cancel" Grid.Column="2" Style="{StaticResource ButtonStyle_2}" Click="Cancel_Click"/>
+        <Button x:Name="SetProgramNo" IsDefault="True" IsCancel="False" Content="Set ProgramNo." Grid.Column="4" Style="{StaticResource ButtonStyle_2}" Click="SetProgramNo_Click"  >
+        </Button>
+
+        <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"  HorizontalAlignment="Center" VerticalAlignment="Top" Height="293" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="2">
+                <Label Style="{StaticResource LabelStyle_1}">Setting Type</Label>
+                <TextBox Text="{Binding Path=SettingType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="2">
+                <Label Style="{StaticResource LabelStyle_1}">MovementDirectionXY</Label>
+                <TextBox Text="{Binding Path=MovementDirection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">MarkingDirection</Label>
+                <TextBox Text="{Binding Path=MarkingDirection, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">MovementConditionXY</Label>
+                <TextBox Text="{Binding Path=MovementConditionXY,Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">MovementConditionZ</Label>
+                <TextBox Text="{Binding Path=MovementConditionZ}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">MarkingT/(Max)LSpeed</Label>
+                <TextBox Text="{Binding Path=MarkingTime, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">Trigger Delay</Label>
+                <TextBox Text="{Binding Path=TriggerDelay, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">Number of Encoder Pulses</Label>
+                <TextBox Text="{Binding Path=NumberOfEncoderPulses, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">MinWorkpieceInterval</Label>
+                <TextBox Text="{Binding Path=MinimumWorkpieceInterval, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">ProgramNoInClass</Label>
+                <TextBox Text="{Binding Path=ProgramNo, Mode=TwoWay}"/>
+            </StackPanel>
+
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="3"  HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="2">
+                <Label Style="{StaticResource LabelStyle_1}">MoveMarkingStartPos</Label>
+                <TextBox Text="{Binding Path=MovementMarkingStartPosition,Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="2">
+                <Label Style="{StaticResource LabelStyle_1}">MoveMarkingEndPos</Label>
+                <TextBox Text="{Binding Path=MovementMarkingEndPosition,Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">ContMarkRept</Label>
+                <TextBox Text="{Binding Path=ContMarkRept,Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">ContMarkInterval</Label>
+                <TextBox Text="{Binding Path=ContMarkInterval,Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">Distance Pointer Position</Label>
+                <TextBox Text="{Binding Path=DistancePointerPosition,Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">Approach Scan Speed</Label>
+                <TextBox Text="{Binding Path=ApproachScanSpeed,Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">Optimized Scan Speed</Label>
+                <TextBox Text="{Binding Path=OptimizedScanSpeed,Mode=OneWay}" IsEnabled="False"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">Scan Optimized Flag</Label>
+                <TextBox Text="{Binding Path=ScanOptimizationFlag,Mode=OneWay}" IsEnabled="False"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ItemStackPanelStyle}">
+                <Label Style="{StaticResource LabelStyle_1}">Marking Order Flag</Label>
+                <TextBox Text="{Binding Path=MarkingOrderFlag,Mode=TwoWay}"/>
+            </StackPanel>
+
+
+        </StackPanel>
+    </Grid>
+</Window>

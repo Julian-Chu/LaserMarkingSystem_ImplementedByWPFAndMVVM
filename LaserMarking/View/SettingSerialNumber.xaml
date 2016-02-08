@@ -1,0 +1,104 @@
+﻿<Window x:Class="LaserMarking.View.SettingSerialNumber"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
+        
+        xmlns:Conditions="clr-namespace:LaserMarking.Protocol"
+        Title="SettingSerialNumber" Height="310" Width="310"
+        Margin="1"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        DataContext="{Binding RelativeSource={RelativeSource self}}" Loaded="Window_Loaded" >
+    <!-- xmlns:local="clr-namespace:LaserMarking.View"-->
+    <Window.Resources>      
+        
+        <Style x:Key="StackPanelStyle_1" TargetType="StackPanel">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="MinWidth" Value="140"/>
+        </Style>
+        <Style x:Key="TitleLabel" TargetType="Label">
+            <Setter Property="MinWidth" Value="140"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="BlanchedAlmond"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="LabelStyle_1" TargetType="Label">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="MinWidth" Value="100"/>
+        </Style>
+        <Style x:Key="TextBoxStyle_1" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="MinWidth" Value="40"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>        
+       
+    </Window.Resources>
+    <Grid x:Name="GridForDatacontext">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <Label Style="{StaticResource TitleLabel}">Serial Number-1</Label>
+                <StackPanel Style="{StaticResource StackPanelStyle_1}">
+                    <Label Style="{StaticResource LabelStyle_1}" MinWidth="50">Project:</Label>
+                    <TextBox Style="{StaticResource TextBoxStyle_1}" Width="90" HorizontalAlignment="Stretch" Text="{Binding Path=Project, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" MouseDoubleClick="TextBox_MouseDoubleClick" />
+                </StackPanel>
+                <StackPanel Style="{StaticResource StackPanelStyle_1}">
+                    <Label Style="{StaticResource LabelStyle_1}">Production Place:</Label>
+                    <TextBox Style="{StaticResource TextBoxStyle_1}" Text="{Binding Path=ProductionPlace,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource StackPanelStyle_1}">
+                    <Label Style="{StaticResource LabelStyle_1}">Production Line</Label>
+                    <TextBox Style="{StaticResource TextBoxStyle_1}" Text="{Binding Path=ProductionLine,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource StackPanelStyle_1}">
+                    <Label Style="{StaticResource LabelStyle_1}">Mold Number</Label>
+                    <TextBox Style="{StaticResource TextBoxStyle_1}" Text="{Binding Path=MoldNumber,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+                <StackPanel  Style="{StaticResource StackPanelStyle_1}">
+                    <Label Style="{StaticResource LabelStyle_1}">Cavity Number</Label>
+                    <TextBox Style="{StaticResource TextBoxStyle_1}" Text="{Binding Path=CavityNumber,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1">
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <Label Style="{StaticResource TitleLabel}">Serial Number-2</Label>
+                <StackPanel Style="{StaticResource StackPanelStyle_1}">
+                    <Label Style="{StaticResource LabelStyle_1}" >ProductionYear</Label>
+                    <TextBox Style="{StaticResource TextBoxStyle_1}" Text="{Binding Path=ProductionYear,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource StackPanelStyle_1}">
+                    <Label Style="{StaticResource LabelStyle_1}">Production Week</Label>
+                    <TextBox Style="{StaticResource TextBoxStyle_1}" Text="{Binding Path=ProductionWeek,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource StackPanelStyle_1}">
+                    <Label Style="{StaticResource LabelStyle_1}" MinWidth="70">Serial number</Label>
+                    <TextBox Style="{StaticResource TextBoxStyle_1}" MinWidth="70" Text="{Binding Path=SerialNumber,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>         
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Label Content="Serial Number-1:" HorizontalAlignment="Left" Margin="1" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox Name="TBSerialNumber1" BorderThickness="1" BorderBrush="RoyalBlue" FontSize="10" FontWeight="Bold" MinHeight="25" Text="{Binding Path=SerialNumber1, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" MouseDoubleClick="TBSerialNumber1_MouseDoubleClick"/>
+            <Label Content="Serial Number-2" HorizontalAlignment="Left" Margin="2" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox Name="TBSerialNumber2" BorderThickness="1" BorderBrush="RoyalBlue" FontSize="10" FontWeight="Bold" MinHeight="25" Text="{Binding Path=SerialNumber2, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="90" MinHeight="50">
+            <Button Name="SettingBTN" HorizontalAlignment="Stretch" VerticalAlignment="Center" MinWidth="70" MinHeight="20" Margin="2"
+                Content="Setting Serial number" FontSize="10" Click="SettingBTN_Click"/>
+            <Button Name="GenerateNewSN"  HorizontalAlignment="Stretch" VerticalAlignment="Center" MinWidth="70" MinHeight="20" Content="Generate new SerialNumber" FontSize="10" Margin="2"  Click="GenerateNewSN_Click"/>
+        </StackPanel>
+        
+
+    </Grid>
+</Window>

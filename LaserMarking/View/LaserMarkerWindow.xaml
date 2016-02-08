@@ -1,0 +1,212 @@
+﻿<Window x:Class="LaserMarking.View.LaserMarkerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LaserMarkerWindow" Loaded="Window_Loaded" 
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <Style x:Key="ButtonStyle_2" TargetType="Button">
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="MinWidth" Value="140"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="4" Background="Wheat" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter x:Name="contentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="4" Background="Aqua" BorderBrush="Black" BorderThickness="1" Margin="-3">
+                                    <ContentPresenter x:Name="contentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}" 
+                                                  />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="4" Background="Aqua" BorderBrush="Black" BorderThickness="1" Margin="-3">
+                                    <ContentPresenter x:Name="contentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}" 
+                                                  />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="4" Background="Aqua" BorderBrush="Black" BorderThickness="1" Margin="-3">
+                                    <ContentPresenter x:Name="contentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}" 
+                                                  />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <Menu Background="White">
+            <MenuItem Header="_File" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch">
+                <MenuItem Header="_Save" Click="SaveSettingAsXML_Click"/>
+                <MenuItem Header="_Open" Click="OpenSettingFromXML_Click"/>
+                
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Command="ApplicationCommands.Copy"/>
+                <MenuItem Command="ApplicationCommands.Cut"/>
+                <MenuItem Command="ApplicationCommands.Paste"/>
+            </MenuItem>
+            <MenuItem Header="_Options"  Click="SwitchToOptions"/>
+            <MenuItem Header="Testing">
+                <MenuItem Name="Test1" Header="Test1" Click="Test1_Click"/>
+            </MenuItem>
+
+        </Menu>
+        <Border Background="WhiteSmoke" BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="2">
+            <Grid Name="TrayGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel x:Name="StackPanel1" HorizontalAlignment="Stretch" Height="Auto" Margin="1,15,-1,143" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+                    <StackPanel Height="100"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <ListBox x:Name="LB1" Grid.Row="1" Grid.RowSpan="1" Background="PeachPuff" Foreground="Black" ItemsSource="{Binding Path=MessageQueue}" />
+        <Grid Grid.Column="1" HorizontalAlignment="Left" MinHeight="100" Margin="0,5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="190">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="ProgramNo." HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Width="auto" Grid.ColumnSpan="2" />
+            <TextBlock Name="MainProgramNo" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0000" Width="auto" Grid.Column="2" Grid.Row="1"  />
+            <Button Name="ProgramNoSettingWindow" Margin="2" Content="Setting Program No" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Click="ProgramNoSettingWindow_Click" Style="{StaticResource ButtonStyle_2}"/>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" MinWidth="190" MinHeight="25" Margin="1" Grid.ColumnSpan="3">
+                <Label Content="SN1:" MinWidth="90"/>
+                <TextBlock x:Name="SerialNumber_1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="035G122" MinWidth="100"  />
+            </StackPanel>
+            <StackPanel Grid.Row="4" Orientation="Horizontal" MinWidth="250" MinHeight="25" Margin="1" Grid.ColumnSpan="3">
+                <Label Content="SN2 Start from:" MinWidth="90"/>
+                <TextBlock Name="StartSerialNumber_2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="143412345"  MinWidth="100" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="5" Orientation="Horizontal" MinWidth="250" MinHeight="25" Margin="1" Grid.ColumnSpan="3">
+                <Label Content="SN2 End at" MinWidth="90"/>
+                <TextBlock Name="EndSerialNumber_2" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="70" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="6" Orientation="Horizontal" MinWidth="250" MinHeight="25" Margin="1" Grid.ColumnSpan="3">
+                <Label Content="Quantity" MinWidth="90"/>
+                <TextBlock Name="Qty" HorizontalAlignment="Center" VerticalAlignment="Center" Text="36"  MinWidth="70" />
+                <StackPanel MinWidth="30" Orientation="Horizontal">
+                    <Button Name="DecreaseSn2" Content="&lt;" Click="DecreaseSerialNumber2_Click"></Button>
+                    <Button Name="IncreaseSn2" Content="&gt;" Click="IncreaseSerialNumber2_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+            <Button Name="SettingSerialNumber" Margin="2" Content="Setting Serial Number" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Click="SettingSerialNumber_Click" Style="{StaticResource ButtonStyle_2}"/>
+            <Button Name="BlockCondition" Margin="2" Content="Setting Block Conditions" Grid.Row="8" Grid.ColumnSpan="3" Click="BlockCondition_Click" Style="{StaticResource ButtonStyle_2}"/>
+            <Button Name="StartMarkingBtn" Style="{StaticResource ButtonStyle_2}" Content="Start Marking" Grid.Column="0" Grid.Row="9" VerticalAlignment="Bottom" MinWidth="80"  Click="StartMarkingBtn_Click" Grid.ColumnSpan="3" Margin="2"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Center" Margin="0" MinWidth="170" MinHeight="40" Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Ellipse Name="Ready" Fill="#FFF4F4F5" Grid.Column="0" Height="25" Width="25" Stroke="Black" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+            <Ellipse Name="Stanby" Fill="#FFF4F4F5" Grid.Column="1" Height="25" Width="25" Stroke="Black" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+            <Ellipse Name="Stop" Fill="#FFF4F4F5" Grid.Column="2" Height="25" Width="25"  Stroke="Black" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+            <Label Content="Ready" HorizontalAlignment="Center" Margin="2" Grid.Row="1" VerticalAlignment="Top"/>
+            <Label Content="Standby" Grid.Column="1" HorizontalAlignment="Center" Margin="2" Grid.Row="1" VerticalAlignment="Top"/>
+            <Label Content="Stop" Grid.Column="2" HorizontalAlignment="Center" Margin="2" Grid.Row="1" VerticalAlignment="Top"/>
+        </Grid>
+       
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="74,332,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+    </Grid>
+</Window>

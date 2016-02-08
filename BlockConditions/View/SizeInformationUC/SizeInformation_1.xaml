@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="BlockConditions.View.SizeInformationUC.SizeInformation_1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="420" d:DesignWidth="220">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="MinWidth" Value="120"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="MinWidth" Value="60"/>
+            <Setter Property="MaxHeight" Value="25"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+        <StackPanel  HorizontalAlignment="Left"   Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" >
+            <Label Content="Size Information"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Line Type"/>
+            <TextBox Text="{Binding Path=LineType}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Font No."/>
+            <TextBox Text="{Binding Path=FontNo}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Character Height"/>
+            <TextBox Text="{Binding Path=CharacterHeight,Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Character Width"/>
+            <TextBox Text="{Binding Path=CharacterWidth,Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Skip Cross"/>
+            <TextBox Text="{Binding Path=SkipCross,Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Number of Lines/&#10;Overlap Rate"/>
+            <TextBox Text="{Binding Path=NumberOfLine,Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Thick Line Width"/>
+            <TextBox Text="{Binding Path=ThickLineWidth,Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Target of Quick &#10;Change of Character"/>
+            <TextBox Text="{Binding Path=TargetOfQuickChangeOfCharacter,Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Regular Pitch &#10;Layout Flag"/>
+            <TextBox Text="{Binding Path=RegularPitchLayoutFlag,Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Character Pitch&#10;/Full Length&#10;/Pitch Angle&#10;/Opening Angle" MinHeight="40"/>
+            <TextBox Text="{Binding Path=CharacterPitch_FullLength_PitchAngle_OpeningAngle,Mode=TwoWay}"/>
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>
