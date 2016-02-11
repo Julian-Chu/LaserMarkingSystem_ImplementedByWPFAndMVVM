@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BlockConditions.View.SizeInformationUC
+namespace BlockConditionsWindow.View.SizeInformationUC
 {
     /// <summary>
     /// Interaction logic for SizeInformation_1.xaml
@@ -25,7 +25,7 @@ namespace BlockConditions.View.SizeInformationUC
             InitializeComponent();
         }
 
-        public SizeInformation_1(Controller.BlockConditionsWithSerialPort BCWSP)
+        public SizeInformation_1(Model.BlockConditionsWithSerialPort BCWSP)
         {
             InitializeComponent();
             DataContext = BCWSP;

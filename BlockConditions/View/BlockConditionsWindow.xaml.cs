@@ -14,15 +14,15 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
 
-namespace BlockConditions.View
+namespace BlockConditionsWindow.View
 {
     /// <summary>
     /// Interaction logic for BlockConditionsWindow.xaml
     /// </summary>
     public partial class BlockConditionsWindow : Window
     {
-        public Controller.BlockConditionsWithSerialPort _CurrentblockConditionController;
-        public List<Controller.BlockConditionsWithSerialPort> blockConditionControllerList;
+        public Model.BlockConditionsWithSerialPort _CurrentblockConditionController;
+        public List<Model.BlockConditionsWithSerialPort> blockConditionControllerList;
         public ObservableCollection<BlockType> blockTypes { get; set; }
         public SerialPort sp;
         
@@ -36,8 +36,8 @@ namespace BlockConditions.View
             
             if (blockConditionControllerList == null)
             {
-                blockConditionControllerList = new List<Controller.BlockConditionsWithSerialPort>();
-                blockConditionControllerList.Add(new Controller.BlockConditionsWithSerialPort(sp));
+                blockConditionControllerList = new List<Model.BlockConditionsWithSerialPort>();
+                blockConditionControllerList.Add(new Model.BlockConditionsWithSerialPort(sp));
             }
             _CurrentblockConditionController = blockConditionControllerList[0];
 
@@ -48,7 +48,7 @@ namespace BlockConditions.View
         
         }
 
-        private void BlockType_ChangedByBlockClass(Controller.BlockConditionsWithSerialPort blockCondition)
+        private void BlockType_ChangedByBlockClass(Model.BlockConditionsWithSerialPort blockCondition)
         { 
             
             switch(blockCondition.BlockType)
@@ -236,7 +236,7 @@ namespace BlockConditions.View
                     "Add new block condition?", "Warning", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    blockConditionControllerList.Add(new Controller.BlockConditionsWithSerialPort(_CurrentblockConditionController.GetSerialPort()));
+                    blockConditionControllerList.Add(new Model.BlockConditionsWithSerialPort(_CurrentblockConditionController.GetSerialPort()));
                     for(int i=0;i<blockConditionControllerList.Count;i++)
                     {
                         blockConditionControllerList[i].BlockNo = i.ToString();

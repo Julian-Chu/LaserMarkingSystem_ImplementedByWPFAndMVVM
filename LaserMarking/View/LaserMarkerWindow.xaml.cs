@@ -31,8 +31,8 @@ namespace LaserMarking.View
         static readonly object _locker = new object();        
         TrayMatrix[] trayMatrix;        
         ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort _commonMarkingConditions;
-        BlockConditions.Controller.BlockConditionsWithSerialPort _blockConditions;
-        List<BlockConditions.Controller.BlockConditionsWithSerialPort> _blockConditionsList;
+        BlockConditionsWindow.Model.BlockConditionsWithSerialPort _blockConditions;
+        List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> _blockConditionsList;
 
         public LaserMarkerWindow()
         {
@@ -65,7 +65,7 @@ namespace LaserMarking.View
 
             _operationWithSerialport = new Controller.OperationWithSerialport(sp, LB1);
             _commonMarkingConditions = new ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort(sp);
-            _blockConditions = new BlockConditions.Controller.BlockConditionsWithSerialPort(sp);
+            _blockConditions = new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(sp);
 
  
         }       
@@ -451,7 +451,7 @@ namespace LaserMarking.View
 
         private void BlockCondition_Click(object sender, RoutedEventArgs e)
         {
-            var BlockConditionWin = new BlockConditions.View.BlockConditionsWindow(sp);
+            var BlockConditionWin = new BlockConditionsWindow.View.BlockConditionsWindow(sp);
             BlockConditionWin._CurrentblockConditionController.ProgramNo = MainProgramNo.Text;
             BlockConditionWin.blockConditionControllerList = this._blockConditionsList;
             try
@@ -483,9 +483,9 @@ namespace LaserMarking.View
 
         private void SaveSettingAsXML_Click(object sender, RoutedEventArgs e)
         {
-            List<BlockConditions.Controller.BlockConditionsWithSerialPort> blockConditionsList = new List<BlockConditions.Controller.BlockConditionsWithSerialPort>{
-                new BlockConditions.Controller.BlockConditionsWithSerialPort(){BlockNo="0"},
-                new BlockConditions.Controller.BlockConditionsWithSerialPort(){BlockNo="1"}
+            List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort>{
+                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="0"},
+                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="1"}
             };
             SerializationAndDeserialzation SAD = new SerializationAndDeserialzation();
             SAD.Serialize(_commonMarkingConditions, blockConditionsList);

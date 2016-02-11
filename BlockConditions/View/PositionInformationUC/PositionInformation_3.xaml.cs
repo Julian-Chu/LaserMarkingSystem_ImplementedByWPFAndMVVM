@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BlockConditions.View.PositionInformationUC
+namespace BlockConditionsWindow.View.PositionInformationUC
 {
     /// <summary>
     /// Interaction logic for PositionInformation_3.xaml
@@ -25,7 +25,7 @@ namespace BlockConditions.View.PositionInformationUC
             InitializeComponent();
         }
 
-        public PositionInformation_3(Controller.BlockConditionsWithSerialPort BCWSP)
+        public PositionInformation_3(Model.BlockConditionsWithSerialPort BCWSP)
         {
             InitializeComponent();            
             DataContext = BCWSP;

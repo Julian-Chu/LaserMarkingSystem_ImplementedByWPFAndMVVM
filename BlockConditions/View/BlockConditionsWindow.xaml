@@ -1,4 +1,4 @@
-﻿<Window x:Class="BlockConditions.View.BlockConditionsWindow"
+﻿<Window x:Class="BlockConditionsWindow.View.BlockConditionsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="BlockConditionsWindow" Height="650" Width="800">

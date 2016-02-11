@@ -19,9 +19,9 @@ namespace LaserMarking.View.Tests
         {
             //arrange
             ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort() ;
-            List<BlockConditions.Controller.BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditions.Controller.BlockConditionsWithSerialPort>{
-                new BlockConditions.Controller.BlockConditionsWithSerialPort(){BlockNo="0"},
-                new BlockConditions.Controller.BlockConditionsWithSerialPort(){BlockNo="1"}
+            List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort>{
+                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="0"},
+                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="1"}
             };
             SerializationAndDeserialzation SAD = new SerializationAndDeserialzation();
             SerializationAndDeserialzation newSAD = new SerializationAndDeserialzation();
@@ -43,9 +43,9 @@ namespace LaserMarking.View.Tests
         {            //assert
             //arrange
             ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort();
-            List<BlockConditions.Controller.BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditions.Controller.BlockConditionsWithSerialPort>{
-                new BlockConditions.Controller.BlockConditionsWithSerialPort(){BlockNo="0",BlockType="001"},
-                new BlockConditions.Controller.BlockConditionsWithSerialPort(){BlockNo="1" ,BlockType="001"}
+            List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort>{
+                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="0",BlockType="001"},
+                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="1" ,BlockType="001"}
             };
             SerializationAndDeserialzation SAD = new SerializationAndDeserialzation();
             SerializationAndDeserialzation newSAD = new SerializationAndDeserialzation();
@@ -65,9 +65,9 @@ namespace LaserMarking.View.Tests
         {            //assert
             //arrange
             ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort();
-            List<BlockConditions.Controller.BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditions.Controller.BlockConditionsWithSerialPort>{
-                new BlockConditions.Controller.BlockConditionsWithSerialPort(){BlockNo="0",BlockType="001"},
-                new BlockConditions.Controller.BlockConditionsWithSerialPort(){BlockNo="1" ,BlockType="001"}
+            List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort>{
+                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="0",BlockType="001"},
+                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="1" ,BlockType="001"}
             };
             SerializationAndDeserialzation SAD = new SerializationAndDeserialzation();
             SerializationAndDeserialzation newSAD = new SerializationAndDeserialzation();

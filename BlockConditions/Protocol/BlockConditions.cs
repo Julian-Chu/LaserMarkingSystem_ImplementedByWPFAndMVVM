@@ -8,9 +8,9 @@ using System.IO.Ports;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace BlockConditions.Protocol
+namespace BlockConditionsWindow.Protocol
 {
-    public abstract class BlockConditions:INotifyPropertyChanged,ICloneable
+    public  class BlockConditions:INotifyPropertyChanged,ICloneable
     {
         protected string HeaderToSetBlockCondition = "K2";
         protected string HeaderToRequestBlockCondition = "K3";
@@ -26,7 +26,9 @@ namespace BlockConditions.Protocol
                 if (int.TryParse(value, out result) == true && result < 2000 && result >= 0)
                     _programNo = value;
                 else
-                    MessageBox.Show("Please input ProgramNo. 0000~1999");
+                    throw new ArgumentOutOfRangeException("Please input ProgramNo. 0000~1999");
+                    //MessageBox.Show("Please input ProgramNo. 0000~1999");
+                
             }
         }
 
@@ -40,7 +42,8 @@ namespace BlockConditions.Protocol
                 if (int.TryParse(value, out result) == true && result <= 255 && result >= 0)
                     _blockNo = value;
                 else
-                    MessageBox.Show("Please input BlockNo. 000~255");
+                    throw new ArgumentOutOfRangeException("Please input BlockNo. 000~255");
+                    //MessageBox.Show("Please input BlockNo. 000~255");
                 
             }
         }
@@ -963,12 +966,12 @@ namespace BlockConditions.Protocol
             { MessageBox.Show(ex.Message); }
         }
 
-        public string DownloadBlockConditions(string ProgramNo, string BlockNo) 
+        virtual public string DownloadBlockConditions(string ProgramNo, string BlockNo) 
         {
             return "111";
         }
 
-        public void UploadBlockConditions(string ProgramNo, string BlockNo) { }
+        virtual public void UploadBlockConditions(string ProgramNo, string BlockNo) { }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")

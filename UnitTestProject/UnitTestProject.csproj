@@ -57,9 +57,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlockConditions\BlockConditions.csproj">
+    <ProjectReference Include="..\BlockConditions\BlockConditionsWindow.csproj">
       <Project>{36857c73-515b-4eb7-934f-ef28f0a3129a}</Project>
-      <Name>BlockConditions</Name>
+      <Name>BlockConditionsWindow</Name>
     </ProjectReference>
     <ProjectReference Include="..\LaserMarking\LaserMarking.csproj">
       <Project>{95527f34-369b-4f0d-939c-f0cca10216b6}</Project>

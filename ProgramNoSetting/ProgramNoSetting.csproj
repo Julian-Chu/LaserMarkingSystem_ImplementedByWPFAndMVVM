@@ -104,9 +104,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlockConditions\BlockConditions.csproj">
+    <ProjectReference Include="..\BlockConditions\BlockConditionsWindow.csproj">
       <Project>{36857c73-515b-4eb7-934f-ef28f0a3129a}</Project>
-      <Name>BlockConditions</Name>
+      <Name>BlockConditionsWindow</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

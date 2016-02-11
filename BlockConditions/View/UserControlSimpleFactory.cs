@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace BlockConditions.View
+namespace BlockConditionsWindow.View
 {
     /// <summary>
     /// simple factory to choose  PositionInformation and SizeInformation to implement.

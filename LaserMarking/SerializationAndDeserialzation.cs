@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Windows;
 using ProgramNoSetting.Controller;
-using BlockConditions.Controller;
+using BlockConditionsWindow.Model;
 
 
 namespace LaserMarking

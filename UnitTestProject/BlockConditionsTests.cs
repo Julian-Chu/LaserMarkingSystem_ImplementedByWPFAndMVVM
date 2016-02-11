@@ -77,7 +77,7 @@ namespace UnitTestProject
         }
     }
 
-    public class mockBlockConditions: BlockConditions.Protocol.BlockConditions
+    public class mockBlockConditions: BlockConditionsWindow.Protocol.BlockConditions
     {
 
     }
