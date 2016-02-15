@@ -9,7 +9,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ProgramNoSetting.Controller
+namespace CommonMarkingConditionsModule.Controller
 {
     public class CommonMarkingConditionsWithSerialPort : Protocol.CommonMarkingConditions
     {
@@ -71,7 +71,7 @@ namespace ProgramNoSetting.Controller
             {
                 sp.Close();
                 sp.Open();
-                string _command = HeaderToRequestCommonMarkingConditions + "," + ProgramNo  + Delimiter;
+                string _command = HeaderToRequestCommonMarkingConditionsFromLM + "," + ProgramNo  + Delimiter;
                 sp.Write(_command);  //(K1,xxxx\r)
                 Thread.Sleep(250);
 
@@ -83,7 +83,7 @@ namespace ProgramNoSetting.Controller
 
                 if (responses[1] == "0") //no error
                 {
-                    this.SettingFromLaserMakringController = _responseFromPort;
+                    this.SettingFromLMController = _responseFromPort;
                 }
                 else
                 {
@@ -108,7 +108,7 @@ namespace ProgramNoSetting.Controller
             {
                 sp.Close();
                 sp.Open();
-                sp.WriteLine(HeaderToSetCommonMarkingConditions + "," +ProgramNo+","+ SettingToLaserMarkingController);  //(K0,parameters...\r)
+                sp.WriteLine(HeaderToSetCommonMarkingConditionsInLM + "," +ProgramNo+","+ SettingToLMController);  //(K0,parameters...\r)
                 Thread.Sleep(250);
 
                 string Command = sp.ReadExisting();

@@ -7,7 +7,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ProgramNoSetting.Protocol
+namespace CommonMarkingConditionsModule.Protocol
 {
     public abstract class CommonMarkingConditions:INotifyPropertyChanged,ICloneable
     {
@@ -350,7 +350,7 @@ namespace ProgramNoSetting.Protocol
         }
         #endregion
 
-        public string SettingToLaserMarkingController
+        public string SettingToLMController
         {
             //use K0 command
             get {return SettingType+","+MovementDirection+","+FixedValue+","+MarkingDirection+","+MovementConditionXY+","+MovementConditionZ+","+MarkingTime+","+
@@ -359,7 +359,7 @@ namespace ProgramNoSetting.Protocol
                 DistancePointerPosition+","+ApproachScanSpeed+","+OptimizedScanSpeed+","+ScanOptimizationFlag+","+MarkingOrderFlag+'\r';}
         }
 
-        public string SettingFromLaserMakringController // Split and Sort the response
+        public string SettingFromLMController // Split and Sort the response
         {
             //use K1 command,  if error exists, will be blocked by method.
             set 
@@ -390,9 +390,9 @@ namespace ProgramNoSetting.Protocol
                 MarkingOrderFlag = responseArray[21];
             }
         }
-        protected string HeaderToSetCommonMarkingConditions = "KO";
+        protected string HeaderToSetCommonMarkingConditionsInLM = "KO";
         protected char Delimiter = '\r';
-        protected string HeaderToRequestCommonMarkingConditions = "K1";
+        protected string HeaderToRequestCommonMarkingConditionsFromLM = "K1";
 
         virtual public void DownloadMarkingConditions(string ProgramNo) {  }
 

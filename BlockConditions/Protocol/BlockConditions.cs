@@ -27,8 +27,7 @@ namespace BlockConditionsWindow.Protocol
                     _programNo = value;
                 else
                     throw new ArgumentOutOfRangeException("Please input ProgramNo. 0000~1999");
-                    //MessageBox.Show("Please input ProgramNo. 0000~1999");
-                
+                    //MessageBox.Show("Please input ProgramNo. 0000~1999");                
             }
         }
 
@@ -87,8 +86,7 @@ namespace BlockConditionsWindow.Protocol
                         break;
 
                     default:
-                        MessageBox.Show("Invaid Value!");
-                        break;
+                        throw new ArgumentOutOfRangeException("Invalid Value!");
                 }
                 NotifyPropertyChanged();
             }

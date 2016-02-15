@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject
 {
+    [Ignore()]
     [TestClass]
     public class BlockConditionsTests
     {

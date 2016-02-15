@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
 using System.Windows;
-using ProgramNoSetting.Controller;
+using CommonMarkingConditionsModule.Controller;
 using BlockConditionsWindow.Model;
 
 
@@ -57,6 +57,31 @@ namespace LaserMarking
             }
                 SerializationAndDeserialzation s = (SerializationAndDeserialzation)obj;
                 return s;
+        }
+       
+
+        public override bool Equals(object obj)
+        {
+            SerializationAndDeserialzation SADobj = obj as SerializationAndDeserialzation;
+            bool IsEqualByBlockConditionsList=true;
+            for(int index=0;index<this.blockConditionsList.Count();index++)
+            {
+                if(IsEqualByBlockConditionsList==false)
+                    break;
+                IsEqualByBlockConditionsList=
+                    this.blockConditionsList[index].Setting == SADobj.blockConditionsList[index].Setting ? true : false;
+            }
+            
+            bool IsEqualByCommonMarkingConditions=
+                this.commonMarkingConditions.SettingToLMController == SADobj.commonMarkingConditions.SettingToLMController ? true : false;
+
+            return IsEqualByBlockConditionsList && IsEqualByCommonMarkingConditions;  
+            
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

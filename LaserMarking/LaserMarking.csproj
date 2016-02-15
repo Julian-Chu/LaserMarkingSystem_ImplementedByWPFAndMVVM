@@ -161,9 +161,9 @@
       <Project>{36857c73-515b-4eb7-934f-ef28f0a3129a}</Project>
       <Name>BlockConditionsWindow</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProgramNoSetting\ProgramNoSetting.csproj">
+    <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsModule.csproj">
       <Project>{d680c6ea-13e2-4fd6-889d-92b5447088cb}</Project>
-      <Name>ProgramNoSetting</Name>
+      <Name>CommonMarkingConditionsModule</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

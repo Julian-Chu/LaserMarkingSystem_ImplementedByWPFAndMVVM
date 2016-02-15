@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaserMarking", "LaserMarking\LaserMarking.csproj", "{95527F34-369B-4F0D-939C-F0CCA10216B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramNoSetting", "ProgramNoSetting\ProgramNoSetting.csproj", "{D680C6EA-13E2-4FD6-889D-92B5447088CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMarkingConditionsModule", "ProgramNoSetting\CommonMarkingConditionsModule.csproj", "{D680C6EA-13E2-4FD6-889D-92B5447088CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockConditionsWindow", "BlockConditions\BlockConditionsWindow.csproj", "{36857C73-515B-4EB7-934F-EF28F0A3129A}"
 EndProject

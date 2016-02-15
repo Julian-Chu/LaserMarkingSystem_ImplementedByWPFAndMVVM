@@ -30,7 +30,7 @@ namespace LaserMarking.View
         
         static readonly object _locker = new object();        
         TrayMatrix[] trayMatrix;        
-        ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort _commonMarkingConditions;
+        CommonMarkingConditionsModule.Controller.CommonMarkingConditionsWithSerialPort _commonMarkingConditions;
         BlockConditionsWindow.Model.BlockConditionsWithSerialPort _blockConditions;
         List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> _blockConditionsList;
 
@@ -64,7 +64,7 @@ namespace LaserMarking.View
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
             _operationWithSerialport = new Controller.OperationWithSerialport(sp, LB1);
-            _commonMarkingConditions = new ProgramNoSetting.Controller.CommonMarkingConditionsWithSerialPort(sp);
+            _commonMarkingConditions = new CommonMarkingConditionsModule.Controller.CommonMarkingConditionsWithSerialPort(sp);
             _blockConditions = new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(sp);
 
  
@@ -171,22 +171,22 @@ namespace LaserMarking.View
             //newWindow.Focus();
         } 
 
-        private void ProgramNoSettingWindow_Click(object sender, RoutedEventArgs e)
+        private void CommonMarkingConditionsModuleWindow_Click(object sender, RoutedEventArgs e)
         {
             //string _currentProgramNumber=MainProgramNo.Text;
-            var programNoSettingWindow = new ProgramNoSetting.View.ProgramNoSettingWindow(MainProgramNo.Text,sp);
+            var CommonMarkingConditionsModuleWindow = new CommonMarkingConditionsModule.View.CommonMarkingConditionsModuleWindow(MainProgramNo.Text,sp);
 
             try
             {
-                programNoSettingWindow.ShowDialog();
+                CommonMarkingConditionsModuleWindow.ShowDialog();
 
-                if (programNoSettingWindow.DialogResult.HasValue && programNoSettingWindow.DialogResult.Value)
+                if (CommonMarkingConditionsModuleWindow.DialogResult.HasValue && CommonMarkingConditionsModuleWindow.DialogResult.Value)
                 {
-                    this.MainProgramNo.Text = programNoSettingWindow.ProgramNo;
-                    this._commonMarkingConditions = programNoSettingWindow.CommonMarkingConditions;
+                    this.MainProgramNo.Text = CommonMarkingConditionsModuleWindow.ProgramNo;
+                    this._commonMarkingConditions = CommonMarkingConditionsModuleWindow.CommonMarkingConditions;
 
                     ///save new program number in default file
-                    Properties.Settings.Default.ProgramNo = programNoSettingWindow.ProgramNo;
+                    Properties.Settings.Default.ProgramNo = CommonMarkingConditionsModuleWindow.ProgramNo;
                     Properties.Settings.Default.Save();
                 }
                 else MessageBox.Show("ProgramNo Setting is cancelled!");
@@ -198,7 +198,7 @@ namespace LaserMarking.View
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
             finally
             {
-                programNoSettingWindow.Close();
+                CommonMarkingConditionsModuleWindow.Close();
             }
 
         }
