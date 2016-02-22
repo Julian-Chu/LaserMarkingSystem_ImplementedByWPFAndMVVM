@@ -121,8 +121,8 @@ namespace BlockConditionsWindow.UnitTests
             
             obj = new BlockConditions();
             //string input = "K3,0,099,000,0000.827,0000.778,0000.00,0000,090.00,360.00,1,0.50,0.250,00000,01200,090.0,100,000,000,00,00,000.760,000.502,00.000,000,00.000,0,0,000.603,?O?R?T?f?P?Q?Q";
-            string[] inputArray = input.Split(',', '\r');
-            obj.SortBlockConditions(inputArray);
+            //string[] inputArray = input.Split(',', '\r');
+            obj.SortBlockConditions(input);
             string actual = obj.Setting;
             //string expect = "099,000,0000.827,0000.778,0000.00,0000,090.00,360.00,1,0.50,0.250,00000,01200,090.0,100,000,000,00,00,000.760,000.502,00.000,000,00.000,0,0,000.603,?O?R?T?f?P?Q?Q";
             string expect = output;

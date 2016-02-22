@@ -13,8 +13,6 @@ namespace LaserMarking.View.Tests
     [TestClass]
     public class LaserMarkerWindowTests
     {
-
-
         [TestMethod]
         public void SerializationAndDeserializationTesting()
         {

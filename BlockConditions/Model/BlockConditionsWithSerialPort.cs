@@ -34,11 +34,12 @@ namespace BlockConditionsWindow.Model
             string ReturnBlockCondition = sp.ReadExisting();
             string[] BlockConditions = ReturnBlockCondition.Split(',');
 
-            if (BlockConditions[1] == "0"){
-                SortBlockConditions(BlockConditions);
+            if (BlockConditions[1] == "0")
+            {
+                SortBlockConditions(ReturnBlockCondition);
             }
             else
-                MessageBox.Show("Error");
+                throw new Exception("Error");                
             }
             catch (System.IO.IOException ex) { throw ex; }
             catch (Exception ex) { throw ex; }

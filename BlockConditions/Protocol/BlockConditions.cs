@@ -844,129 +844,152 @@ namespace BlockConditionsWindow.Protocol
             set { }
         }
 
-        public void SortBlockConditions(string[] ReturnedBlockConditions)
+        public void SortBlockConditions(string ReturnedBlockConditions)
         {
             try
-            {
-                Block3DShape = ReturnedBlockConditions[2];
-                BlockType = ReturnedBlockConditions[3];
+            {                
+                string[] ReturnedBlockConditionsArray = ReturnedBlockConditions.Split(',', '\r');
 
-                int CurrentIndex = 0;
+                Block3DShape = ReturnedBlockConditionsArray[2];
+                BlockType = ReturnedBlockConditionsArray[3];
 
-                //For Position Information
-                string tempPositionInformation = "";
+                int CurrentIndex_ReturnedBlockConditionsArray = 0;
 
-                switch (BlockType)
-                {
-                    case "000":
-                    case "001":
-                    case "030":
-                        for (int i = 4; i <= 9; i++)
-                        {
-                            tempPositionInformation += ReturnedBlockConditions[i] + ",";
-                            CurrentIndex = i;
-                        }
-                        break;
-                    case "009":
-                    case "020":
-                    case "031":
-                        for (int i = 4; i <= 8; i++)
-                        {
-                            tempPositionInformation += ReturnedBlockConditions[i]+",";
-                            CurrentIndex = i;
-                        }
-                        break;
-                    case "-01":
-                    case "-02":
-                    case "-04":
-                        for(int i=4;i<=10;i++)
-                        {
-                            tempPositionInformation += ReturnedBlockConditions[i]+ ",";
-                            CurrentIndex = i;
-                        }
-                        break;
+                SetPositionInformation_byBlocktype(ReturnedBlockConditionsArray,ref CurrentIndex_ReturnedBlockConditionsArray);
 
-                    default:
-                        MessageBox.Show("Invalid BlockType!");
-                        break;
-                }
+                SetSpeedInformation_byBlocktype(ReturnedBlockConditionsArray,ref CurrentIndex_ReturnedBlockConditionsArray);
 
-                PositionInformation = tempPositionInformation;
+                SetSizeInformation_byBlocktype(ReturnedBlockConditionsArray, ref CurrentIndex_ReturnedBlockConditionsArray);
 
-                ///For Speed Information
-                //Common speed information
-                string tempSpeedInformation = "";
-                int start = CurrentIndex + 1;
-                int end = CurrentIndex + 9;
-                for (int i = start; i <= end; i++)
-                {
-                    tempSpeedInformation += ReturnedBlockConditions[i]+",";
-                    CurrentIndex = i;
-                
-                }
-                //additional speed information for 030,031,032,033,034
-                switch (BlockType)
-                {
-                    case "030":
-                    case "031":
-                    case "032":
-                    case "033":
-                    case "034":
-                        for (int i = 0; i < 2; i++)
-                            tempSpeedInformation += ReturnedBlockConditions[++CurrentIndex] + ",";
-                        break;
-                    default:
-                        break;
-                }
-                SpeedInformation = tempSpeedInformation;
-
-                ///For Size Information
-                
-                string tempSizeInformation = "";
-                start = CurrentIndex + 1;
-
-                switch (BlockType)
-                {
-                    case "000":
-                    case "001":
-                    case "002":
-                    case "003":
-                        end = CurrentIndex + 10;
-                        for (int i = start; i <= end; i++)
-                        {
-                            tempSizeInformation += ReturnedBlockConditions[i]+",";
-                            CurrentIndex = i;
-                        }
-
-                        break;
-                    case "009":
-                        string codeType = ReturnedBlockConditions[CurrentIndex + 1];
-                        List<string> codetypes = new List<string> { "07", "08", "09", "10" };
-                        end = codetypes.Contains(codeType) ? CurrentIndex+ 14 : CurrentIndex+10;  //if code type is 07-10
-                        for (int i = start; i <= end; i++)
-                        {
-                            tempSizeInformation += ReturnedBlockConditions[i]+",";
-                            CurrentIndex = i;
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-                SizeInformation = tempSizeInformation;
-
-                List<string> blockTypes = new List<string> { "004", "005", "006", "007", "008", "032", "033", "034" };
-                if (!blockTypes.Contains(BlockType))
-                    CharacterStringInformation = ReturnedBlockConditions[CurrentIndex + 1];
+                SetCharacterStringInformation_byBlocktype(ReturnedBlockConditionsArray, CurrentIndex_ReturnedBlockConditionsArray);
             }
 
             catch (Exception ex)
-            { MessageBox.Show(ex.Message); }
+            {
+                throw ex;
+            }
+        }
+
+        private void SetCharacterStringInformation_byBlocktype(string[] ReturnedBlockConditionsArray, int CurrentIndex_ReturnedBlockConditionsArray)
+        {
+            List<string> blockTypes = new List<string> { "004", "005", "006", "007", "008", "032", "033", "034" };
+            if (!blockTypes.Contains(BlockType))
+                CharacterStringInformation = ReturnedBlockConditionsArray[CurrentIndex_ReturnedBlockConditionsArray + 1];
+        }
+
+        private void SetSizeInformation_byBlocktype(string[] ReturnedBlockConditionsArray, ref int CurrentIndex_ReturnedBlockConditionsArray)
+        {
+            ///For Size Information
+
+            string tempSizeInformation = "";
+            int StartIndex_SizeInformation = CurrentIndex_ReturnedBlockConditionsArray + 1;
+            int EndIndex_SizeInformation;
+
+            switch (BlockType)
+            {
+                case "000":
+                case "001":
+                case "002":
+                case "003":
+                    EndIndex_SizeInformation = CurrentIndex_ReturnedBlockConditionsArray + 10;
+                    for (int i = StartIndex_SizeInformation; i <= EndIndex_SizeInformation; i++)
+                    {
+                        tempSizeInformation += ReturnedBlockConditionsArray[i] + ",";
+                        CurrentIndex_ReturnedBlockConditionsArray = i;
+                    }
+
+                    break;
+                case "009":
+                    string codeType = ReturnedBlockConditionsArray[CurrentIndex_ReturnedBlockConditionsArray + 1];
+                    List<string> codetypes = new List<string> { "07", "08", "09", "10" };
+                    EndIndex_SizeInformation = codetypes.Contains(codeType) ? CurrentIndex_ReturnedBlockConditionsArray + 14 : CurrentIndex_ReturnedBlockConditionsArray + 10;  //if code type is 07-10
+                    for (int i = StartIndex_SizeInformation; i <= EndIndex_SizeInformation; i++)
+                    {
+                        tempSizeInformation += ReturnedBlockConditionsArray[i] + ",";
+                        CurrentIndex_ReturnedBlockConditionsArray = i;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            SizeInformation = tempSizeInformation;
+           
+        }
+
+        private void SetSpeedInformation_byBlocktype(string[] ReturnedBlockConditionsArray, ref int CurrentIndex_ReturnedBlockConditionsArray)
+        {
+            ///For Speed Information
+            //Common speed information
+            string tempSpeedInformation = "";
+            int StartIndex_CommonSpeedInformation = CurrentIndex_ReturnedBlockConditionsArray + 1;
+            int EndIndex_CommonSpeedInformation = CurrentIndex_ReturnedBlockConditionsArray + 9;
+            for (int i = StartIndex_CommonSpeedInformation; i <= EndIndex_CommonSpeedInformation; i++)
+            {
+                tempSpeedInformation += ReturnedBlockConditionsArray[i] + ",";
+                CurrentIndex_ReturnedBlockConditionsArray = i;
+
+            }
+            //additional speed information for 030,031,032,033,034
+            List<string> BlockTypesForAdditionSpeedInformation = new List<string> { "030", "031", "032", "033", "034" };
+            if(BlockTypesForAdditionSpeedInformation.Contains(BlockType))
+            {
+                for (int i = 0; i < 2; i++)
+                    tempSpeedInformation += ReturnedBlockConditionsArray[++CurrentIndex_ReturnedBlockConditionsArray] + ",";
+            }
+
+            SpeedInformation = tempSpeedInformation;
+            
+        }
+
+        private void SetPositionInformation_byBlocktype(string[] ReturnedBlockConditionsArray, ref int CurrentIndex_ReturnedBlockConditionsArray)
+        {
+            //For Position Information
+            string tempPositionInformation = "";
+
+            switch (BlockType)
+            {
+                case "000":
+                case "001":
+                case "030":
+                    for (int i = 4; i <= 9; i++)
+                    {
+                        tempPositionInformation += ReturnedBlockConditionsArray[i] + ",";
+                        CurrentIndex_ReturnedBlockConditionsArray = i;
+                    }
+                    break;
+                case "009":
+                case "020":
+                case "031":
+                    for (int i = 4; i <= 8; i++)
+                    {
+                        tempPositionInformation += ReturnedBlockConditionsArray[i] + ",";
+                        CurrentIndex_ReturnedBlockConditionsArray = i;
+                    }
+                    break;
+                case "-01":
+                case "-02":
+                case "-04":
+                    for (int i = 4; i <= 10; i++)
+                    {
+                        tempPositionInformation += ReturnedBlockConditionsArray[i] + ",";
+                        CurrentIndex_ReturnedBlockConditionsArray = i;
+                    }
+                    break;
+
+                default:
+
+                    throw new Exception("Invalid BlockType!");
+                    
+            }
+
+            PositionInformation = tempPositionInformation;
+           // return CurrentIndex;
         }
 
         virtual public string DownloadBlockConditions(string ProgramNo, string BlockNo) 
         {
-            return "111";
+            return "Null";
         }
 
         virtual public void UploadBlockConditions(string ProgramNo, string BlockNo) { }
