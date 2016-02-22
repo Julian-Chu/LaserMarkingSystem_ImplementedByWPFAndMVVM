@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace CommonMarkingConditionsModule.Protocol
 {
-    public abstract class CommonMarkingConditions:INotifyPropertyChanged,ICloneable
+    public class CommonMarkingConditions:INotifyPropertyChanged,ICloneable
     {
         #region Marking Condition Properties
         //IDcode

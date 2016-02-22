@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D56A28B4-5F6C-48C7-978D-2481136A4A64}</ProjectGuid>
+    <ProjectGuid>db30bf42-ee18-4c20-997a-7a55d0e63182</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTestProject</RootNamespace>
-    <AssemblyName>UnitTestProject</AssemblyName>
+    <RootNamespace>BlockConditionsTests2</RootNamespace>
+    <AssemblyName>BlockConditionsTests2</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,30 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="LaserMarkerWindowTests.cs" />
-    <Compile Include="BlockConditionsTests.cs" />
-    <Compile Include="UnitTest_ProgramNoSetting.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BlockConditions\BlockConditionsWindow.csproj">
-      <Project>{36857c73-515b-4eb7-934f-ef28f0a3129a}</Project>
-      <Name>BlockConditionsWindow</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LaserMarking\LaserMarking.csproj">
-      <Project>{95527f34-369b-4f0d-939c-f0cca10216b6}</Project>
-      <Name>LaserMarking</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsModule.csproj">
-      <Project>{d680c6ea-13e2-4fd6-889d-92b5447088cb}</Project>
-      <Name>CommonMarkingConditionsModule</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\LaserMarking.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

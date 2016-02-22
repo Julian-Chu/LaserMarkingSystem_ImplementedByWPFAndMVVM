@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
 using System.Windows;
-using CommonMarkingConditionsModule.Controller;
 using BlockConditionsWindow.Model;
+using CommonMarkingConditionsModule.Model;
 
 
 namespace LaserMarking
@@ -25,7 +25,9 @@ namespace LaserMarking
         }
 
         public SerializationAndDeserialzation() //constructor without args for serialization
-        {}
+        {
+        
+        }
 
 
         public void Serialize(CommonMarkingConditionsWithSerialPort commonMarkingConditions, List<BlockConditionsWithSerialPort> blockConditions)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LaserMarking.View;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Windows;
+using CommonMarkingConditionsModule.Model;
 
 namespace LaserMarking.View.Tests
 {
@@ -18,7 +19,7 @@ namespace LaserMarking.View.Tests
         public void SerializationAndDeserializationTesting()
         {
             //arrange
-            CommonMarkingConditionsModule.Controller.CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new CommonMarkingConditionsModule.Controller.CommonMarkingConditionsWithSerialPort() ;
+            CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new CommonMarkingConditionsWithSerialPort();
             List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort>{
                 new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="0"},
                 new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="1"}
@@ -42,7 +43,7 @@ namespace LaserMarking.View.Tests
         public void SerializationAndDeserializationTesting_SubTesting1()
         {            //assert
             //arrange
-            CommonMarkingConditionsModule.Controller.CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new CommonMarkingConditionsModule.Controller.CommonMarkingConditionsWithSerialPort();
+            CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new CommonMarkingConditionsWithSerialPort();
             List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort>{
                 new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="0",BlockType="001"},
                 new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="1" ,BlockType="001"}
@@ -64,7 +65,7 @@ namespace LaserMarking.View.Tests
         public void SerializationAndDeserializationTesting_SubTesting2()
         {            //assert
             //arrange
-            CommonMarkingConditionsModule.Controller.CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new CommonMarkingConditionsModule.Controller.CommonMarkingConditionsWithSerialPort();
+            CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new CommonMarkingConditionsWithSerialPort();
             List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort>{
                 new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="0",BlockType="001"},
                 new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="1" ,BlockType="001"}

@@ -9,7 +9,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace CommonMarkingConditionsModule.Controller
+namespace CommonMarkingConditionsModule.Model
 {
     public class CommonMarkingConditionsWithSerialPort : Protocol.CommonMarkingConditions
     {
@@ -20,44 +20,17 @@ namespace CommonMarkingConditionsModule.Controller
             this.sp = sp;
         }
 
-        public CommonMarkingConditionsWithSerialPort()
+        //constructor without Args for Testing
+        public CommonMarkingConditionsWithSerialPort()  
         { }
 
         public CommonMarkingConditionsWithSerialPort(SerialPort sp)
         {
             this.sp = sp;
 
-            // length of MarkingCondition by command K0 and K1
-            string[] ConditionArray = new string[22];
 
-            for (int i = 0; i < ConditionArray.Length; i++)
-                ConditionArray[i] = "";
-
-            ///connect model and view model
-            ///collect all properties in an array
-            ConditionArray[(int)Properties.IDcode] = this.IDcode;
-            ConditionArray[(int)Properties.ProgramNumber] = this.ProgramNo;
-            ConditionArray[(int)Properties.SettingType] = this.SettingType;
-            ConditionArray[(int)Properties.MovementDirectXY] = this.MovementDirection;
-            ConditionArray[(int)Properties.FixedValue] = this.FixedValue;
-            ConditionArray[(int)Properties.MarkingDirection] = this.MarkingDirection;
-            ConditionArray[(int)Properties.MovementConditionXY] = this.MovementConditionXY;
-            ConditionArray[(int)Properties.MovementConditionZ] = this.MovementConditionZ;
-            ConditionArray[(int)Properties.MarkingTime] = this.MarkingTime;
-            ConditionArray[(int)Properties.TriggerDelay] = this.TriggerDelay;
-            ConditionArray[(int)Properties.NumberOfEncoderPulses] = this.NumberOfEncoderPulses;
-            ConditionArray[(int)Properties.MinWorkpcsInterval] = this.MinimumWorkpieceInterval;
-            ConditionArray[(int)Properties.MovementMarkingStartPosition] = this.MovementMarkingStartPosition;
-            ConditionArray[(int)Properties.MovementMarkingEndPosition] = this.MovementMarkingEndPosition;
-            ConditionArray[(int)Properties.FixedValue2] = this.FixedValue2;
-            ConditionArray[(int)Properties.ContMarkRept] = this.ContMarkRept;
-            ConditionArray[(int)Properties.ContMarkInterval] = this.ContMarkInterval;
-            ConditionArray[(int)Properties.DistancePointerPosition] = this.DistancePointerPosition;
-            ConditionArray[(int)Properties.ApproachScanSpeed] = this.ApproachScanSpeed;
-            ConditionArray[(int)Properties.OptimiziedScanSpeed] = this.OptimizedScanSpeed;
-            ConditionArray[(int)Properties.ScanOptimizationFlag] = this.ScanOptimizationFlag;
         }
-        string[] ConditionArray = new string[22];
+     
 
         /// <summary>
         /// Separate the command string
@@ -77,7 +50,7 @@ namespace CommonMarkingConditionsModule.Controller
 
                 // string[] Commands = sp.ReadExisting().Split(delimiterChars);
                 string _responseFromPort = sp.ReadExisting();
-                Thread.Sleep(250);
+                //Thread.Sleep(250);
                 
                 string[] responses = _responseFromPort.Split(delimiterString, System.StringSplitOptions.RemoveEmptyEntries);
 

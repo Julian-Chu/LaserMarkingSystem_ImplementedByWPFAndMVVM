@@ -160,7 +160,7 @@
             </Grid.ColumnDefinitions>
             <Label Content="ProgramNo." HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Width="auto" Grid.ColumnSpan="2" />
             <TextBlock Name="MainProgramNo" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0000" Width="auto" Grid.Column="2" Grid.Row="1"  />
-            <Button Name="ProgramNoSettingWindow" Margin="2" Content="Setting Program No" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Click="ProgramNoSettingWindow_Click" Style="{StaticResource ButtonStyle_2}"/>
+            <Button Name="ProgramNoSettingWindow" Margin="2" Content="Setting Program No" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Click="CommonMarkingConditionsWindow_Click" Style="{StaticResource ButtonStyle_2}"/>
             <StackPanel Grid.Row="3" Orientation="Horizontal" MinWidth="190" MinHeight="25" Margin="1" Grid.ColumnSpan="3">
                 <Label Content="SN1:" MinWidth="90"/>
                 <TextBlock x:Name="SerialNumber_1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="035G122" MinWidth="100"  />

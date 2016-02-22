@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D56A28B4-5F6C-48C7-978D-2481136A4A64}</ProjectGuid>
+    <ProjectGuid>{31C151E0-717A-4799-A0CF-6A17369123A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTestProject</RootNamespace>
-    <AssemblyName>UnitTestProject</AssemblyName>
+    <RootNamespace>CommonMarkingConditionsModule.Tests</RootNamespace>
+    <AssemblyName>CommonMarkingConditionsModule.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -43,37 +47,20 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="LaserMarkerWindowTests.cs" />
-    <Compile Include="BlockConditionsTests.cs" />
-    <Compile Include="UnitTest_ProgramNoSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\CommonMarkingConditionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlockConditions\BlockConditionsWindow.csproj">
-      <Project>{36857c73-515b-4eb7-934f-ef28f0a3129a}</Project>
-      <Name>BlockConditionsWindow</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LaserMarking\LaserMarking.csproj">
-      <Project>{95527f34-369b-4f0d-939c-f0cca10216b6}</Project>
-      <Name>LaserMarking</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsModule.csproj">
-      <Project>{d680c6ea-13e2-4fd6-889d-92b5447088cb}</Project>
+      <Project>{D680C6EA-13E2-4FD6-889D-92B5447088CB}</Project>
       <Name>CommonMarkingConditionsModule</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\LaserMarking.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

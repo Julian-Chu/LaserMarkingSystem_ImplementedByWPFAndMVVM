@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{95527F34-369B-4F0D-939C-F0CCA10216B6}</ProjectGuid>
+    <ProjectGuid>{D680C6EA-13E2-4FD6-889D-92B5447088CB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LaserMarking</RootNamespace>
-    <AssemblyName>LaserMarking</AssemblyName>
+    <RootNamespace>CommonMarkingConditionsModule</RootNamespace>
+    <AssemblyName>CommonMarkingConditionsModule</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -47,48 +47,17 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.Toolkit">
-      <HintPath>..\..\..\..\C#\Extended WPF Toolkit Binaries\Xceed.Wpf.Toolkit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SerializationAndDeserialzation.cs" />
-    <Compile Include="Model\CommonPaletteConditionsWithSerialport.cs" />
-    <Compile Include="Model\DataBaseControl.cs" />
-    <Compile Include="Model\FrequentlyUsedChangeCommandsAndRequestCommandsWithSerialport.cs" />
-    <Compile Include="Model\OperationWithSerialport.cs" />
-    <Compile Include="Protocol\FrequentlyUsedChangeCommandsAndRequestCommands.cs" />
-    <Compile Include="Model\SettingAndRequestingIndividualPaletteConditionsWithSerialPort.cs" />
-    <Compile Include="Model\SettingAndRequestingTitleWithSerialPort.cs" />
-    <Compile Include="Model\SettingCounterConditionWithSerialport.cs" />
-    <Compile Include="Data\SerialNumber.cs" />
-    <Compile Include="Protocol\CommonPaletteConditions.cs" />
-    <Compile Include="Protocol\CreatingANewProgramNumber.cs" />
+    <Compile Include="Model\CommonMarkingConditionsWithSerialPort.cs" />
+    <Compile Include="Protocol\CommonMarkingConditions.cs" />
     <Compile Include="Protocol\ErrorCode.cs" />
-    <Compile Include="Protocol\Operation.cs" />
-    <Compile Include="Protocol\SerialNumberForASG.cs" />
-    <Compile Include="Protocol\SettingAndRequestingIndividualPaletteConditions.cs" />
-    <Compile Include="Protocol\SettingAndRequestingTitle.cs" />
-    <Compile Include="Protocol\SettingCounterConditions.cs" />
-    <Compile Include="View\CommandConfirmWindows.xaml.cs">
-      <DependentUpon>CommandConfirmWindows.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\LaserMarkerWindow.xaml.cs">
-      <DependentUpon>LaserMarkerWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MessageQueue.cs" />
-    <Compile Include="View\SettingSerialNumber.xaml.cs">
-      <DependentUpon>SettingSerialNumber.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Testing.xaml.cs">
-      <DependentUpon>Testing.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="View\CommonMarkingConditionsWindow.xaml.cs">
+      <DependentUpon>CommonMarkingConditionsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -102,23 +71,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\CommandConfirmWindows.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\LaserMarkerWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SettingSerialNumber.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Testing.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Window1.xaml">
+    <Page Include="View\CommonMarkingConditionsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,20 +104,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\2DCode.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BlockConditions\BlockConditionsWindow.csproj">
       <Project>{36857c73-515b-4eb7-934f-ef28f0a3129a}</Project>
       <Name>BlockConditionsWindow</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsModule.csproj">
-      <Project>{d680c6ea-13e2-4fd6-889d-92b5447088cb}</Project>
-      <Name>CommonMarkingConditionsModule</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

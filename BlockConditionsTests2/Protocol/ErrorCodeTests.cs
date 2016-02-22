@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LaserMarking.Protocol
+namespace BlockConditionsTests2.Protocol
 {
-    class DataBaseControl
+    class ErrorCodeTests
     {
     }
 }

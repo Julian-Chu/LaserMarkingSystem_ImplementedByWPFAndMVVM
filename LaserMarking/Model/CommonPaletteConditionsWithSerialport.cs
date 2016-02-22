@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 
-namespace LaserMarking.Protocol
+namespace LaserMarking.Model
 {
     public class CommonPaletteConditionsWithSerialport:Protocol.CommonPaletteConditions
     {
