@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Timers;
 
 
-namespace LaserMarking.Controller
+namespace LaserMarking.Model
 {
     class OperationWithSerialport:Protocol.Operation
     {
@@ -73,7 +73,7 @@ namespace LaserMarking.Controller
         {
             try
             {
-                await Task.Delay(10000).ConfigureAwait(false);                
+                await Task.Delay(200).ConfigureAwait(false);                
                 string response = sp.ReadExisting();
                 sp.Close();
                 string[] responseArray = response.Split(',','\r');
@@ -131,7 +131,7 @@ namespace LaserMarking.Controller
             { _listbox.Items.Add("Marking Finished!"); }           
         }                
      
-        public async Task StartMarkingProcess()
+        async public Task StartMarkingProcess()
         {
             var result = RequestREADYStatus();
             switch(result)

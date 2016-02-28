@@ -26,7 +26,7 @@ namespace LaserMarking.View
     {
         SerialPort sp;
         SerialPort spForTesting;
-        Controller.OperationWithSerialport _operationWithSerialport;        
+        Model.OperationWithSerialport _operationWithSerialport;        
         
         static readonly object _locker = new object();        
         TrayMatrix[] trayMatrix;        
@@ -63,7 +63,7 @@ namespace LaserMarking.View
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
-            _operationWithSerialport = new Controller.OperationWithSerialport(sp, LB1);
+            _operationWithSerialport = new Model.OperationWithSerialport(sp, LB1);
             _commonMarkingConditions = new CommonMarkingConditionsModule.Model.CommonMarkingConditionsWithSerialPort(sp);
             _blockConditions = new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(sp);
 
@@ -159,8 +159,9 @@ namespace LaserMarking.View
             _timer.Start();
              * */
             #endregion
-
+            
             await _operationWithSerialport.StartMarkingProcess();
+            
             btn.IsEnabled = true;
         }                
 
