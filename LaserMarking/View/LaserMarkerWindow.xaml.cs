@@ -452,7 +452,7 @@ namespace LaserMarking.View
 
         private void BlockCondition_Click(object sender, RoutedEventArgs e)
         {
-            var BlockConditionWin = new BlockConditionsWindow.View.BlockConditionsWindow(sp);
+            var BlockConditionWin = new BlockConditionsWindow.View.BlockConditionsWindowView(sp);
             BlockConditionWin._CurrentblockConditionController.ProgramNo = MainProgramNo.Text;
             BlockConditionWin.blockConditionControllerList = this._blockConditionsList;
             try
