@@ -16,7 +16,7 @@ namespace BlockConditionsWindow.Protocol
         protected string HeaderToRequestBlockCondition = "K3";
         protected char Delimiter = '\r';
 
-        private string _programNo = "";
+        private string _programNo = "Test";
         public string ProgramNo
         {
             get { return _programNo; }
