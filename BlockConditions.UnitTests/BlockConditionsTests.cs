@@ -36,13 +36,9 @@ namespace BlockConditionsWindow.UnitTests
             //Arrange
             BlockConditions obj = new BlockConditions();
             string expected = "Please input ProgramNo";
-            
             //Act
-            //obj.ProgramNo = input;
-            //actual = obj.ProgramNo;
-            var actual = Assert.Catch(() => obj.ProgramNo = input);
+            var actual = Assert.Catch<ArgumentOutOfRangeException>(() => obj.ProgramNo = input);
             //Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => obj.ProgramNo = input);
             StringAssert.Contains(expected, actual.Message);            
         }
 
@@ -68,11 +64,9 @@ namespace BlockConditionsWindow.UnitTests
             //Arrange
             obj = new BlockConditions();
             string expected = "Please input BlockNo";
-
             //Act      
             var actualException = Assert.Catch(() => obj.BlockNo = input);
             //Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => obj.BlockNo = input);
             StringAssert.Contains(expected, actualException.Message);        
         }
 
@@ -98,14 +92,11 @@ namespace BlockConditionsWindow.UnitTests
             string expected = "Invalid Value";
             //Act
             var actualException = Assert.Catch<ArgumentOutOfRangeException>(() => obj.BlockType = input);
-            Assert.Throws<ArgumentOutOfRangeException>(() => obj.BlockType = input);
+
+            //Assert
             StringAssert.Contains(expected, actualException.Message);            
         }
-
-
-        
-
-        
+                
         [TestCase("K3,0,099,000,0000.827,0000.778,0000.00,0000,090.00,360.00,1,0.50,0.250,00000,01200,090.0,100,000,000,00,00,000.760,000.502,00.000,000,00.000,0,0,000.603,?O?R?T?f?P?Q?Q"
             , "099,000,0000.827,0000.778,0000.00,0000,090.00,360.00,1,0.50,0.250,00000,01200,090.0,100,000,000,00,00,000.760,000.502,00.000,000,00.000,0,0,000.603,?O?R?T?f?P?Q?Q")]
         [TestCase("K3,0,099,009,0001.715,-001.042,0000.00,0000,090.00,1,0.50,0.250,00000,01200,090.0,100,000,000,10,00,000.000,0,0,000000,0,0.040,00.100,0004,0.000,000000,0000.0,0000,035G122-%2Y%2P0W%05P0C0C"
@@ -118,15 +109,15 @@ namespace BlockConditionsWindow.UnitTests
             , "099,000,-000.293,-000.642,0000.00,0000,090.00,360.00,0,0.50,0.250,00000,01200,090.0,100,000,000,00,00,000.500,000.330,00.000,000,00.000,0,0,000.413,%H<000>")]
         public void BlockConditions_InputCorrectStringsByCommandK3_ReturnTheSameStringAsInput(string input, string output)
         {
-            
+            //Assign
             obj = new BlockConditions();
-            //string input = "K3,0,099,000,0000.827,0000.778,0000.00,0000,090.00,360.00,1,0.50,0.250,00000,01200,090.0,100,000,000,00,00,000.760,000.502,00.000,000,00.000,0,0,000.603,?O?R?T?f?P?Q?Q";
-            //string[] inputArray = input.Split(',', '\r');
+            string actual;
+            string expect;
+            //Act
             obj.SortBlockConditions(input);
-            string actual = obj.Setting;
-            //string expect = "099,000,0000.827,0000.778,0000.00,0000,090.00,360.00,1,0.50,0.250,00000,01200,090.0,100,000,000,00,00,000.760,000.502,00.000,000,00.000,0,0,000.603,?O?R?T?f?P?Q?Q";
-            string expect = output;
-
+            actual = obj.Setting;
+            expect = output;
+            //Assert
             Assert.AreEqual(expect, actual);
         }
     }
