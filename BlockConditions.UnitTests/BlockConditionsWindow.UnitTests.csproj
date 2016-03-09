@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BlockConditionsWindow.UnitTests</RootNamespace>
-    <AssemblyName>BlockConditions.UnitTests</AssemblyName>
+    <AssemblyName>BlockConditionsWindow.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="BlockConditionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\BlockConditionsWindowViewModelUnitTests.cs" />
     <Compile Include="ViewModel\RelayCommandUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
