@@ -58,6 +58,7 @@
     <Compile Include="Protocol\ErrorCode.cs" />
     <Compile Include="ViewModel\BlockConditionsWindowViewModel.cs" />
     <Compile Include="ViewModel\BlockType.cs" />
+    <Compile Include="ViewModel\IDialogService.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\UserControlSimpleFactory.cs" />
     <Compile Include="View\BlockConditionsWindowView.xaml.cs">

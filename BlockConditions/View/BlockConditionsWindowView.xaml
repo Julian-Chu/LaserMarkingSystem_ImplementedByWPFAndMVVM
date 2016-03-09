@@ -1,0 +1,186 @@
+﻿<Window x:Class="BlockConditionsWindow.View.BlockConditionsWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BlockConditionsWindow" Height="650" Width="800"
+        xmlns:local="clr-namespace:BlockConditionsWindow.ViewModel"
+        xmlns:userControls="clr-namespace:BlockConditionsWindow.View.PositionInformationUC"
+       
+        
+        >
+    <!--
+    <Window.DataContext>
+        <local:BlockConditionsWindowViewModel/>
+    </Window.DataContext>
+    -->
+    <Window.Resources>
+        <Style  TargetType="Label">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="MinWidth" Value="140"/>
+        </Style>
+        <Style x:Key="Label_2" TargetType="Label">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="MinWidth" Value="95"/>
+        </Style>
+        <Style x:Key="ButtonStyle_2" TargetType="Button">
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="MinWidth" Value="80"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="4" Background="Wheat" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter x:Name="contentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="4" Background="Aqua" BorderBrush="Black" BorderThickness="1" Margin="-3">
+                                    <ContentPresenter x:Name="contentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}" 
+                                                  />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="MinWidth" Value="60"/>
+            <Setter Property="MaxHeight" Value="25"/>
+        </Style>
+    </Window.Resources>
+        
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" >
+            <Label Style="{StaticResource Label_2}" MinWidth="80">Program No.</Label>
+            <!--<TextBox Width="50" Margin="2" Text="{Binding Path=ProgramNo, Mode=OneWay}" IsEnabled="False"/>-->
+            <TextBox Width="50" Margin="2" Text="{Binding Path=CurrentblockConditionModel.ProgramNo, Mode=TwoWay}" IsEnabled="True"/>
+            <TextBox MinWidth="20" Text="{Binding Path=CurrentblockConditionModel.BlockType,Mode=OneWay}" IsEnabled="False"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <Label Style="{StaticResource Label_2}">Block No.</Label>
+            <Button Name="BlockNumberDecrement" MinWidth="20" Height="25" Content="&lt;" Command="{Binding Path=PreviousBlockNumber}"/>
+            <TextBox Name="BlockNumber"  Width="50" Margin="2"  Text="{Binding Path=CurrentblockConditionModel.BlockNo, Mode=OneWay}"/>
+            <Button Name="BlockNumberIncrement" MinWidth="20" Height="25" Content="&gt;" Command="{Binding Path=NextBlockNumber}"/>
+            <!--<Button Name="BlockNumberIncrement" MinWidth="20" Height="25" Content="&gt;" Click="BlockNumberIncrement_Click"/>-->
+            
+            <!-- old version: BlockNo Textbox bind with class<TextBox Name="BlockNumber" Width="50" Margin="2" Text="{Binding Path=BlockNo,Mode=TwoWay}" TextChanged="BlockNo_TextChanged"/>
+            -->
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+            <Label Style="{StaticResource Label_2}">Block 3D Shape</Label>
+            <TextBox Width="50" Margin="2" Text="{Binding Path=CurrentblockConditionModel.Block3DShape, Mode=OneWay}" IsEnabled="False"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.Column="0">
+            <Label Style="{StaticResource Label_2}" MinWidth="80" Width="58">Block Type</Label>
+            <ComboBox Name="CB_BlockType" ItemsSource="{Binding Path=BlockTypes}" SelectedItem="{Binding Path=ComboboxSelectedItem, Mode=TwoWay}" HorizontalAlignment="Left"   Margin="1" VerticalAlignment="Center" MinWidth="110" />
+            
+            
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label Style="{StaticResource Label_2}">String information</Label>
+            <TextBox Width="350" Text="{Binding Path=CurrentblockConditionModel.CharacterStringInformation,Mode=TwoWay}" FontSize="16"/>
+        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="0">
+            <StackPanel Orientation="Vertical" Name="StackPanelForPositionInformation" MinHeight="150" MinWidth="200" Grid.Column="0">
+                <ContentControl  Content="{Binding Path=PositionInformationUC}"/>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="1">
+            <StackPanel Orientation="Vertical" Name="StackPanelForSizeInformation" MinHeight="150" MinWidth="250">
+                <ContentControl Content="{Binding Path=SizeInformationUC}"/>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="2">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Row="3" Name="StackpanelForSpeedInformation">
+                <Label Content="Speed Information"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
+                    <Label Content="Marking Flag" />
+                    <TextBox HorizontalAlignment="Right" Text="{Binding Path=CurrentblockConditionModel.MarkingFlag, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Approach"/>
+                    <TextBox Text="{Binding Path=CurrentblockConditionModel.Approach,Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Approach between &#10;Characters"/>
+                    <TextBox Text="{Binding Path=CurrentblockConditionModel.ApproachBetweenCharacters,Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Scan Speed"/>
+                    <TextBox Text="{Binding Path=CurrentblockConditionModel.ScanSpeed,Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Marking Power"/>
+                    <TextBox Text="{Binding Path=CurrentblockConditionModel.MarkingPower,Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Q switch frequency"/>
+                    <TextBox Text="{Binding Path=CurrentblockConditionModel.QSwitchFrequency,Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Initial pulse application &#10;value_ON"/>
+                    <TextBox Text="{Binding Path=CurrentblockConditionModel.InitialPulseApplicationValue,Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Initial pulse application &#10;value_OFF"/>
+                    <TextBox Text="{Binding Path=CurrentblockConditionModel.InitialPulseApplicationTime,Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Name="NumberOfMultipunchers">
+                    <Label Content="Number of &#10;multi-punchers"/>
+                    <TextBox Text="{Binding Path=CurrentblockConditionModel.NumberOfMultiPunchers,Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Name="MultipunchTime">
+                    <Label Content="Multi-punch time"/>
+                    <TextBox Text="{Binding Path=CurrentblockConditionModel.MultipunchTime,Mode=TwoWay}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
+            <Button Name="BlockConditionDownload" Content="Download" Click="BlockConditionDownload_Click" Style="{StaticResource ButtonStyle_2}" />
+            <Button Name="BlockConditionUpload" Content="Upload" Click="BlockConditionUpload_Click" Style="{StaticResource ButtonStyle_2}"/>
+
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">
+            <Button Name="Set" Content="Set as Setting" IsDefault="True"  Command="{Binding Set}" Click="Set_Click"  Style="{StaticResource ButtonStyle_2}"/>
+            <Button Name="Cancel" Content="Cancel" IsCancel="True" Command="{Binding Cancel}" Style="{StaticResource ButtonStyle_2}"/>
+        </StackPanel>
+    </Grid>
+</Window>
