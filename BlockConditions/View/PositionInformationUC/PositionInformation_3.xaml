@@ -17,7 +17,7 @@
             <Setter Property="MaxHeight" Value="25"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>

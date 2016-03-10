@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BlockConditionsWindow.ViewModel;
 using NUnit.Framework;
-using BlockConditionsWindow.Protocol;
+using BlockConditionsWindow.Model;
+
 namespace BlockConditionsWindow.ViewModel.UnitTests
 {
-    [TestFixture()]
+    [TestFixture, Apartment(System.Threading.ApartmentState.STA)]
     public class BlockConditionsWindowViewModelUnitTests
     {
         BlockConditions obj;
@@ -29,6 +30,7 @@ namespace BlockConditionsWindow.ViewModel.UnitTests
             //Assign            
             ViewModel = new BlockConditionsWindowViewModel();
             obj = ViewModel.CurrentblockConditionModel as BlockConditions;
+            ViewModel.BlockTypeChangedEvent -= ViewModel.ChangeUserControl;
             string actual;
             string expect;
             //Act

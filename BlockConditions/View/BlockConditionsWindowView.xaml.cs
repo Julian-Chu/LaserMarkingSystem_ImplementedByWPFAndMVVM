@@ -125,20 +125,20 @@ namespace BlockConditionsWindow.View
 
                 //Position Information
                 UserControl userControl_PositionInfo;                             
-                userControl_PositionInfo = UserControlSimpleFactory.PositionInformation(obj.BlockTypeIDcode);
+                //userControl_PositionInfo = UserControlSimpleFactory.PositionInformation(obj.BlockTypeIDcode);
                 StackPanelForPositionInformation.Children.Clear();   
-                StackPanelForPositionInformation.Children.Add(userControl_PositionInfo);
-                userControl_PositionInfo.DataContext = _CurrentblockConditionController;                
+                //StackPanelForPositionInformation.Children.Add(serControl_PositionInfo);
+                //userControl_PositionInfo.DataContext = _CurrentblockConditionController;                
 
                 //Speed Information
                 InstantiatingSpeedinformation(obj.BlockTypeIDcode);
 
                 //Size Information               
                 UserControl usercontrol_SizeInfo;                
-                usercontrol_SizeInfo = UserControlSimpleFactory.SizeInformation(obj.BlockTypeIDcode);
+                //usercontrol_SizeInfo = UserControlSimpleFactory.SizeInformation(obj.BlockTypeIDcode);
                 StackPanelForSizeInformation.Children.Clear();
-                StackPanelForSizeInformation.Children.Add(usercontrol_SizeInfo);
-                usercontrol_SizeInfo.DataContext = _CurrentblockConditionController;
+                //StackPanelForSizeInformation.Children.Add(usercontrol_SizeInfo);
+                //usercontrol_SizeInfo.DataContext = _CurrentblockConditionController;
             }
             else //when (obj.BlockTypeIDcode==""), clear stackpanel of Position and Size
             {
@@ -267,7 +267,7 @@ namespace BlockConditionsWindow.View
                     "Add new block condition?", "Warning", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    blockConditionControllerList.Add(new Model.BlockConditionsWithSerialPort(_CurrentblockConditionController.GetSerialPort()));
+                    blockConditionControllerList.Add(new Model.BlockConditionsWithSerialPort(_CurrentblockConditionController.GetCurrentSerialPort()));
                     for(int i=0;i<blockConditionControllerList.Count;i++)
                     {
                         blockConditionControllerList[i].BlockNo = i.ToString();

@@ -9,30 +9,29 @@ namespace BlockConditionsWindow.ViewModel
 {
     interface IDialogService
     {
-         MessageBoxResult ShowMessageBox();
+        MessageBoxResult ShowMessageBox(string Content, string title, MessageBoxButton button);
     }
 
 
-    public class DialogServiceToAddNewBlockCondition:IDialogService
+    public class DialogServiceToAddNewBlockCondition : IDialogService
     {
-
-        public MessageBoxResult ShowMessageBox()
+        public MessageBoxResult ShowMessageBox(string Content, string title, MessageBoxButton button)
         {
-            return MessageBox.Show("Add new BlockCondition?", "Warning", MessageBoxButton.YesNo);
+            return MessageBox.Show(Content, title, button);
         }
     }
 
-    public class MockDialogServiceAlwaysYes:IDialogService
+    public class MockDialogServiceAlwaysYes : IDialogService
     {
-        public MessageBoxResult ShowMessageBox()
+        public MessageBoxResult ShowMessageBox(string Content, string title, MessageBoxButton button)
         {
             return MessageBoxResult.Yes;
         }
     }
 
-    public class MockDialogServiceAlwaysNo:IDialogService
+    public class MockDialogServiceAlwaysNo : IDialogService
     {
-        public MessageBoxResult ShowMessageBox()
+        public MessageBoxResult ShowMessageBox(string Content, string title, MessageBoxButton button)
         {
             return MessageBoxResult.No;
         }

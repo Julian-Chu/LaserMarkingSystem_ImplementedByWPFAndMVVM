@@ -25,10 +25,10 @@ namespace BlockConditionsWindow.View.PositionInformationUC
             InitializeComponent();
         }
 
-        public PositionInformation_3(Model.BlockConditionsWithSerialPort BCWSP)
+        public PositionInformation_3(Model.BlockConditions blockConditionsModel)
         {
             InitializeComponent();            
-            DataContext = BCWSP;
+            this.DataContext = blockConditionsModel;
         }
     }
 }

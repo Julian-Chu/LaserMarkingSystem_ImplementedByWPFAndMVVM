@@ -25,10 +25,10 @@ namespace BlockConditionsWindow.View.SizeInformationUC
             InitializeComponent();
         }
 
-        public SizeInformation_2(Model.BlockConditionsWithSerialPort BCWSP)
+        public SizeInformation_2(Model.BlockConditions blockConditionsModel)
         {
             InitializeComponent();
-            DataContext = BCWSP;
+            DataContext = blockConditionsModel;
         }
     }
 }

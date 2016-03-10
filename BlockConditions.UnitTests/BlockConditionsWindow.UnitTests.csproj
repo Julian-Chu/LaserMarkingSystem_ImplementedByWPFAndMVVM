@@ -37,7 +37,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlockConditionsTests.cs" />
+    <Compile Include="View\BlockConditionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BlockConditionsWindowViewModelUnitTests.cs" />
     <Compile Include="ViewModel\RelayCommandUnitTests.cs" />

@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace BlockConditionsWindow.Model
 {
-    public class BlockConditionsWithSerialPort : Protocol.BlockConditions
+    public class BlockConditionsWithSerialPort : Model.BlockConditions
     {
         SerialPort sp;
 
@@ -19,7 +19,7 @@ namespace BlockConditionsWindow.Model
         public BlockConditionsWithSerialPort(SerialPort sp)
         {this.sp = sp;}
 
-        public SerialPort GetSerialPort()
+        public SerialPort GetCurrentSerialPort()
         {return this.sp;}
 
         public BlockConditionsWithSerialPort() { }
@@ -54,8 +54,8 @@ namespace BlockConditionsWindow.Model
                 sp.Open();
                 sp.WriteLine(HeaderToSetBlockCondition + "," + this.ProgramNo + "," + this.BlockNo + "," + Setting + "," + Delimiter);
             }
-            //catch (System.IO.IOException ex) { throw ex; }
-            //catch (Exception ex) { throw ex; }
+            catch (System.IO.IOException ex) { throw ex; }
+            catch (Exception ex) { throw ex; }
             finally
             {
                 sp.Close();

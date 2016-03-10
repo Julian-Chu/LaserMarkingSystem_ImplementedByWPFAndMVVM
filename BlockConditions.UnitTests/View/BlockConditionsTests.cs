@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BlockConditionsWindow.Protocol;
+using BlockConditionsWindow.Model;
 
-namespace BlockConditionsWindow.UnitTests
+namespace BlockConditionsWindow.View.UnitTests
 {
     [TestFixture]
     public class BlockConditionsTests

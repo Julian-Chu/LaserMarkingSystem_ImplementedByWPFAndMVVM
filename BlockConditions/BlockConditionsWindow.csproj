@@ -54,11 +54,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\BlockConditionsWithSerialPort.cs" />
-    <Compile Include="Protocol\BlockConditions.cs" />
-    <Compile Include="Protocol\ErrorCode.cs" />
+    <Compile Include="Model\BlockConditions.cs" />
+    <Compile Include="Model\ErrorCode.cs" />
     <Compile Include="ViewModel\BlockConditionsWindowViewModel.cs" />
     <Compile Include="ViewModel\BlockType.cs" />
     <Compile Include="ViewModel\IDialogService.cs" />
+    <Compile Include="ViewModel\IKeyenceCommuniationService.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\UserControlSimpleFactory.cs" />
     <Compile Include="View\BlockConditionsWindowView.xaml.cs">

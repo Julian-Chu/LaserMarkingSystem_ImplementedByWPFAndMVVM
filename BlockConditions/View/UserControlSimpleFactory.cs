@@ -12,28 +12,28 @@ namespace BlockConditionsWindow.View
     /// </summary>
     class UserControlSimpleFactory
     {
-        static public UserControl PositionInformation(string blockType)
+        static public UserControl PositionInformation(Model.BlockConditions BCs)
         {
-            switch (blockType)
+            switch (BCs.BlockType)
             {
                 case "":
                     return new UserControl();
                 case "000":
                 case "001":
                 case "030":
-                    return new PositionInformationUC.PositionInformation_1();
+                    return new PositionInformationUC.PositionInformation_1(BCs);
                 case "009":
                 case "020":
                 case "031":
-                    return new PositionInformationUC.PositionInformation_2();
+                    return new PositionInformationUC.PositionInformation_2(BCs);
                 default:
-                    return new PositionInformationUC.PositionInformation_3();
+                    return new PositionInformationUC.PositionInformation_3(BCs);
             }
         }
 
-        static public UserControl SizeInformation(string blockType)
+        static public UserControl SizeInformation(Model.BlockConditions BCs)
         {
-            switch (blockType)
+            switch (BCs.BlockType)
             {
                 case "":
                     return new UserControl();
@@ -41,9 +41,9 @@ namespace BlockConditionsWindow.View
                 case "001":
                 case "002":
                 case "003":
-                    return new SizeInformationUC.SizeInformation_1();                    
+                    return new SizeInformationUC.SizeInformation_1(BCs);                    
                 case "009":                                   
-                    return new SizeInformationUC.SizeInformation_2();
+                    return new SizeInformationUC.SizeInformation_2(BCs);
                 default:
                     return new UserControl();
             }

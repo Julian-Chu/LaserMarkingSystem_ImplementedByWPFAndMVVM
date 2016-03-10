@@ -8,13 +8,13 @@ using System.IO.Ports;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace BlockConditionsWindow.Protocol
+namespace BlockConditionsWindow.Model
 {
     public  class BlockConditions:INotifyPropertyChanged,ICloneable
     {
-        protected string HeaderToSetBlockCondition = "K2";
-        protected string HeaderToRequestBlockCondition = "K3";
-        protected char Delimiter = '\r';
+        readonly public string HeaderToSetBlockCondition = "K2";
+        readonly public string HeaderToRequestBlockCondition = "K3";
+        readonly public char Delimiter = '\r';
 
         private string _programNo = "0";
         public string ProgramNo

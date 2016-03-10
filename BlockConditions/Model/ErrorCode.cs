@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace BlockConditionsWindow.Protocol
+namespace BlockConditionsWindow.Model
 {
     public class ErrorCode
     {
