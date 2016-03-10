@@ -267,7 +267,7 @@ namespace BlockConditionsWindow.View
                     "Add new block condition?", "Warning", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    blockConditionControllerList.Add(new Model.BlockConditionsWithSerialPort(_CurrentblockConditionController.GetSerialPort()));
+                    blockConditionControllerList.Add(new Model.BlockConditionsWithSerialPort(_CurrentblockConditionController.GetCurrentSerialPort()));
                     for(int i=0;i<blockConditionControllerList.Count;i++)
                     {
                         blockConditionControllerList[i].BlockNo = i.ToString();

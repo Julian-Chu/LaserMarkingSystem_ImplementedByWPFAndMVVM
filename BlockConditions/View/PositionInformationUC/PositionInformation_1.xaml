@@ -22,8 +22,8 @@
         <Style TargetType="Label">
             <Setter Property="MinWidth" Value="115"/>
         </Style>
-
     </UserControl.Resources>
+        
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

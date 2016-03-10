@@ -3,9 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="BlockConditionsWindow" Height="650" Width="800"
         xmlns:local="clr-namespace:BlockConditionsWindow.ViewModel"
-        xmlns:userControls="clr-namespace:BlockConditionsWindow.View.PositionInformationUC"
-       
-        
+        xmlns:userControls="clr-namespace:BlockConditionsWindow.View.PositionInformationUC" 
         >
     <!--
     <Window.DataContext>
@@ -109,7 +107,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.Column="0">
             <Label Style="{StaticResource Label_2}" MinWidth="80" Width="58">Block Type</Label>
-            <ComboBox Name="CB_BlockType" ItemsSource="{Binding Path=BlockTypes}" SelectedItem="{Binding Path=ComboboxSelectedItem, Mode=TwoWay}" HorizontalAlignment="Left"   Margin="1" VerticalAlignment="Center" MinWidth="110" />
+            <ComboBox Name="CB_BlockType" ItemsSource="{Binding Path=BlockTypes}" SelectedItem="{Binding Path=ComboboxSelectedItem}" HorizontalAlignment="Left"   Margin="1" VerticalAlignment="Center" MinWidth="110" />
             
             
         </StackPanel>
@@ -174,12 +172,12 @@
             </StackPanel>
         </Border>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
-            <Button Name="BlockConditionDownload" Content="Download" Click="BlockConditionDownload_Click" Style="{StaticResource ButtonStyle_2}" />
-            <Button Name="BlockConditionUpload" Content="Upload" Click="BlockConditionUpload_Click" Style="{StaticResource ButtonStyle_2}"/>
+            <Button Name="BlockConditionDownload" Content="Download" Command="{Binding Path=Download}" Style="{StaticResource ButtonStyle_2}" />
+            <Button Name="BlockConditionUpload" Content="Upload" Command="{Binding Path=Upload}" Style="{StaticResource ButtonStyle_2}"/>
 
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">
-            <Button Name="Set" Content="Set as Setting" IsDefault="True"  Command="{Binding Set}" Click="Set_Click"  Style="{StaticResource ButtonStyle_2}"/>
+            <Button Name="Set" Content="Set as Setting" IsDefault="True"  Command="{Binding Set}" Style="{StaticResource ButtonStyle_2}"/>
             <Button Name="Cancel" Content="Cancel" IsCancel="True" Command="{Binding Cancel}" Style="{StaticResource ButtonStyle_2}"/>
         </StackPanel>
     </Grid>

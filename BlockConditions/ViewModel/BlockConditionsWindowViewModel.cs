@@ -16,7 +16,10 @@ namespace BlockConditionsWindow.ViewModel
 
     public class BlockConditionsWindowViewModel : INotifyPropertyChanged
     {
+        #region interfaces
         internal IDialogService _dialogService;
+        internal IKeyenceCommuniationService _keyenceCommunicationService;
+        #endregion
 
         #region  DataContext
         private Model.BlockConditionsWithSerialPort _currentblockConditionModel;
@@ -43,23 +46,25 @@ namespace BlockConditionsWindow.ViewModel
         }
         public bool? DialogResult { get; set; }
 
+        private UserControl _positionInfromationUC;
         public UserControl PositionInformationUC
         {
-            get
-            {
-                UserControl positionUC = new View.PositionInformationUC.PositionInformation_1();
-                positionUC.DataContext = CurrentblockConditionModel;
-                return positionUC;
+            get{return _positionInfromationUC;}
+            set 
+            { 
+                _positionInfromationUC = value;
+                NotifyPropertyChanged();
             }
         }
 
+        private UserControl _sizeInformationUC;
         public UserControl SizeInformationUC
         {
-            get
-            {
-                UserControl sizeUC = new View.SizeInformationUC.SizeInformation_1();
-                sizeUC.DataContext = CurrentblockConditionModel;
-                return sizeUC;
+            get {return _sizeInformationUC;}
+            set 
+            { 
+                _sizeInformationUC = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -87,7 +92,6 @@ namespace BlockConditionsWindow.ViewModel
                 new BlockType("Dot 2D Code","031"),
                 new BlockType("Workpiece image logo","-02"),
             };
-
             return blockTypes;
         }
         private enum BlockTypeID
@@ -106,11 +110,16 @@ namespace BlockConditionsWindow.ViewModel
         private BlockType _comboboxSelectedItem;
         public BlockType ComboboxSelectedItem
         {
-            get { return _comboboxSelectedItem; }
+            get {return _comboboxSelectedItem; }
             set
             {
-                _comboboxSelectedItem = value;
-                NotifyPropertyChanged();
+                if (_comboboxSelectedItem != value)
+                {
+                    _comboboxSelectedItem = value;
+                    CurrentblockConditionModel.BlockType = value.BlockTypeIDcode;
+                    NotifyPropertyChanged("ComboboxSelectedItem");
+                    OnBlockTypeChanged();
+                }
             }
         }
 
@@ -118,31 +127,28 @@ namespace BlockConditionsWindow.ViewModel
 
         #region Constructor
         public BlockConditionsWindowViewModel()
-        {
+        {            
+            //Interface
             _dialogService = new DialogServiceToAddNewBlockCondition();
+            _keyenceCommunicationService=new KeyenceCommunicationService(new System.IO.Ports.SerialPort());
 
-            Set = new RelayCommand(obj =>
-            {
-                ShowMessage1(obj);
-                ShowMessage2(obj);
-            });
-
+            //Command
+            Set = new RelayCommand(obj =>SetAsSetting(obj));
             Cancel = new RelayCommand(obj => CloseWindowWithoutSave(obj));
+            PreviousBlockNumber = new RelayCommand(obj => ToNextBlockNumber());
+            NextBlockNumber = new RelayCommand(obj => ToPreviousBlockNumber());
+            Upload=new RelayCommand(obj=>BlockConditionUpload());
+            Download = new RelayCommand(obj => BlockConditionDownload());
+
             if (_blockConditionModelList == null)
             {
                 _blockConditionModelList = new List<Model.BlockConditionsWithSerialPort>();
-                AddNewBlockConditionInList();
-                
+                AddNewBlockConditionInList();                
             }
 
-            NextBlockNumber = new RelayCommand(obj => ToNextBlockNumber());
-            PreviousBlockNumber = new RelayCommand(obj => ToPreviousBlockNumber());
-
-
-
             CurrentblockConditionModel = _blockConditionModelList[0];
+            BlockType_ChangedByBlockClass(CurrentblockConditionModel);
         }
-
 
         internal void AddNewBlockConditionInList()
         {
@@ -153,8 +159,8 @@ namespace BlockConditionsWindow.ViewModel
         #region ICommands
         private ICommand _previousBlockNumber;
         private ICommand _nextBlockNumber;
-        private ICommand _blockConditionDownload;
-        private ICommand _blockConditionUpload;
+        private ICommand _download;
+        private ICommand _upload;
         private ICommand _set;
         private ICommand _cancel;
 
@@ -172,14 +178,14 @@ namespace BlockConditionsWindow.ViewModel
 
         public ICommand Download
         {
-            get { return _blockConditionDownload; }
-            set { _blockConditionDownload = value; }
+            get { return _download; }
+            set { _download = value; }
         }
 
         public ICommand Upload
         {
-            get { return _blockConditionUpload; }
-            set { _blockConditionUpload = value; }
+            get { return _upload; }
+            set { _upload = value; }
         }
 
         public ICommand Set
@@ -207,38 +213,22 @@ namespace BlockConditionsWindow.ViewModel
         #endregion
 
         #region Methods
-        private void ShowMessage1(object obj)
+        private void SetAsSetting(object obj)
         {
-            MessageBox.Show("Test 1:");
-        }
-
-        private void ShowMessage2(object obj)
-        {
-            MessageBox.Show("Test 2:");
+            this.BlockTypeChangedEvent += ChangeUserControl;
+            OnBlockTypeChanged();
         }
 
         private void CloseWindowWithoutSave(object obj)
         {
             MessageBox.Show("TEST");
             //dialogResult = false;
-
             Application.Current.MainWindow.Close();
-
         }
 
-        private void BlockConditionDownload(object obj)
+        internal void BlockType_ChangedByBlockClass(Model.BlockConditionsWithSerialPort blockCondition)
         {
-            var result = MessageBox.Show("Continue data downloading from controller", "Confirm Window", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                _currentblockConditionModel.DownloadBlockConditions();
-                BlockType_ChangedByBlockClass(_currentblockConditionModel);
-            }
-        }
-
-        public void BlockType_ChangedByBlockClass(Model.BlockConditionsWithSerialPort blockCondition)
-        {
-
+            this.BlockTypeChangedEvent+=ChangeUserControl;
             switch (blockCondition.BlockType)
             {
                 case "000":
@@ -272,12 +262,15 @@ namespace BlockConditionsWindow.ViewModel
                     ComboboxSelectedItem = blockTypes[(int)BlockTypeID.empty];
                     break;
             }
+            OnBlockTypeChanged();
         }
+
+
 
         #endregion
 
-        #region Method For Button
-        public void ToNextBlockNumber()
+        #region Methods For Button
+        internal void ToNextBlockNumber()
         {
             int _currentIndex = BlockConditionModelList.FindIndex(element => element.BlockNo == CurrentblockConditionModel.BlockNo);
 
@@ -288,7 +281,7 @@ namespace BlockConditionsWindow.ViewModel
                 CurrentblockConditionModel = BlockConditionModelList[_newIndex];
 
             }
-            else if (_dialogService.ShowMessageBox() == MessageBoxResult.Yes)
+            else if (_dialogService.ShowMessageBox("Add new BlockCondition?", "Warning", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 AddNewBlockConditionInList();
                 CurrentblockConditionModel = BlockConditionModelList.Last();
@@ -303,6 +296,76 @@ namespace BlockConditionsWindow.ViewModel
             int _newIndex = (_currentIndex - 1 >= 0) ? _newIndex = _currentIndex - 1 : _currentIndex;
             CurrentblockConditionModel = BlockConditionModelList[_newIndex];
         }
+
+        internal void BlockConditionDownload()
+        {
+            if (_dialogService.ShowMessageBox("Continue data downloading from controller", "Confirm Window", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                _keyenceCommunicationService.Download(CurrentblockConditionModel);
+                BlockType_ChangedByBlockClass(CurrentblockConditionModel);
+            }
+        }
+
+        internal void BlockConditionUpload()
+        {
+            if (_dialogService.ShowMessageBox("Continue data uploading to controller", "Confirm Window", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                _keyenceCommunicationService.Upload(CurrentblockConditionModel);
+            }
+        }
         #endregion
+
+        public event EventHandler BlockTypeChangedEvent;
+        public void OnBlockTypeChanged()
+        {
+            if(BlockTypeChangedEvent!=null)
+            BlockTypeChangedEvent(this,new EventArgs());
+        }
+
+        //private void InstantiatingSpeedinformation(string blockType)
+        //{
+        //    switch (blockType)
+        //    {
+        //        case "030":
+        //        case "031":
+        //        case "032":
+        //        case "033":
+        //        case "034":
+        //            if (!StackpanelForSpeedInformation.Children.Contains(NumberOfMultipunchers))
+        //                StackpanelForSpeedInformation.Children.Add(NumberOfMultipunchers);
+        //            if (!StackpanelForSpeedInformation.Children.Contains(MultipunchTime))
+        //                StackpanelForSpeedInformation.Children.Add(MultipunchTime);
+        //            break;
+        //        default:
+        //            StackpanelForSpeedInformation.Children.Remove(NumberOfMultipunchers);
+        //            StackpanelForSpeedInformation.Children.Remove(MultipunchTime);
+        //            break;
+        //    }
+        //}
+
+        private void ChangeUserControl(object sender, EventArgs e)
+        {
+
+            if (CurrentblockConditionModel.BlockType!="")
+            {
+                //Position Information
+                PositionInformationUC=View.UserControlSimpleFactory.PositionInformation(CurrentblockConditionModel.BlockType);
+                
+
+                //Speed Information
+                //InstantiatingSpeedinformation(obj.BlockTypeIDcode);
+
+                //Size Information               
+                SizeInformationUC = View.UserControlSimpleFactory.SizeInformation(CurrentblockConditionModel.BlockType);
+
+            }
+            else //when (obj.BlockTypeIDcode==""), clear stackpanel of Position and Size
+            {
+                // StackPanelForPositionInformation.Children.Clear();
+                //StackPanelForSizeInformation.Children.Clear(); 
+            }
+        }
+
+
     }
 }
