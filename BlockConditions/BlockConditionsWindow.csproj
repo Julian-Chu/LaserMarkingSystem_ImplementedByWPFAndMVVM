@@ -61,6 +61,12 @@
     <Compile Include="ViewModel\IDialogService.cs" />
     <Compile Include="ViewModel\IKeyenceCommuniationService.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="View\SpeedInformationUC\SpeedInformation_1.xaml.cs">
+      <DependentUpon>SpeedInformation_1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SpeedInformationUC\SpeedInformation_2.xaml.cs">
+      <DependentUpon>SpeedInformation_2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControlSimpleFactory.cs" />
     <Compile Include="View\BlockConditionsWindowView.xaml.cs">
       <DependentUpon>BlockConditionsWindowView.xaml</DependentUpon>
@@ -113,6 +119,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SizeInformationUC\SizeInformation_2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SpeedInformationUC\SpeedInformation_1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SpeedInformationUC\SpeedInformation_2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -128,47 +128,7 @@
         </Border>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="2">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Row="3" Name="StackpanelForSpeedInformation">
-                <Label Content="Speed Information"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
-                    <Label Content="Marking Flag" />
-                    <TextBox HorizontalAlignment="Right" Text="{Binding Path=CurrentblockConditionModel.MarkingFlag, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Approach"/>
-                    <TextBox Text="{Binding Path=CurrentblockConditionModel.Approach,Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Approach between &#10;Characters"/>
-                    <TextBox Text="{Binding Path=CurrentblockConditionModel.ApproachBetweenCharacters,Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Scan Speed"/>
-                    <TextBox Text="{Binding Path=CurrentblockConditionModel.ScanSpeed,Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Marking Power"/>
-                    <TextBox Text="{Binding Path=CurrentblockConditionModel.MarkingPower,Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Q switch frequency"/>
-                    <TextBox Text="{Binding Path=CurrentblockConditionModel.QSwitchFrequency,Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Initial pulse application &#10;value_ON"/>
-                    <TextBox Text="{Binding Path=CurrentblockConditionModel.InitialPulseApplicationValue,Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Initial pulse application &#10;value_OFF"/>
-                    <TextBox Text="{Binding Path=CurrentblockConditionModel.InitialPulseApplicationTime,Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Name="NumberOfMultipunchers">
-                    <Label Content="Number of &#10;multi-punchers"/>
-                    <TextBox Text="{Binding Path=CurrentblockConditionModel.NumberOfMultiPunchers,Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Name="MultipunchTime">
-                    <Label Content="Multi-punch time"/>
-                    <TextBox Text="{Binding Path=CurrentblockConditionModel.MultipunchTime,Mode=TwoWay}"/>
-                </StackPanel>
+                <ContentControl Content="{Binding Path=SpeedInformationUC}"/>
             </StackPanel>
         </Border>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">

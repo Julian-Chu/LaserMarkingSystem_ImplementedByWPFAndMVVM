@@ -131,10 +131,10 @@ namespace BlockConditionsWindow.View
                 //userControl_PositionInfo.DataContext = _CurrentblockConditionController;                
 
                 //Speed Information
-                InstantiatingSpeedinformation(obj.BlockTypeIDcode);
+                //InstantiatingSpeedinformation(obj.BlockTypeIDcode);
 
                 //Size Information               
-                UserControl usercontrol_SizeInfo;                
+                //UserControl usercontrol_SizeInfo;                
                 //usercontrol_SizeInfo = UserControlSimpleFactory.SizeInformation(obj.BlockTypeIDcode);
                 StackPanelForSizeInformation.Children.Clear();
                 //StackPanelForSizeInformation.Children.Add(usercontrol_SizeInfo);
@@ -147,26 +147,26 @@ namespace BlockConditionsWindow.View
             }
         }  
 
-        private void InstantiatingSpeedinformation(string blockType)
-        {
-            switch (blockType)
-            {
-                case "030":
-                case "031":
-                case "032":
-                case "033":
-                case "034":
-                    if (!StackpanelForSpeedInformation.Children.Contains(NumberOfMultipunchers))
-                        StackpanelForSpeedInformation.Children.Add(NumberOfMultipunchers);
-                    if (!StackpanelForSpeedInformation.Children.Contains(MultipunchTime))
-                        StackpanelForSpeedInformation.Children.Add(MultipunchTime);
-                    break;
-                default:
-                    StackpanelForSpeedInformation.Children.Remove(NumberOfMultipunchers);
-                    StackpanelForSpeedInformation.Children.Remove(MultipunchTime);
-                    break;
-            }
-        }          
+        //private void InstantiatingSpeedinformation(string blockType)
+        //{
+        //    switch (blockType)
+        //    {
+        //        case "030":
+        //        case "031":
+        //        case "032":
+        //        case "033":
+        //        case "034":
+        //            if (!StackpanelForSpeedInformation.Children.Contains(NumberOfMultipunchers))
+        //                StackpanelForSpeedInformation.Children.Add(NumberOfMultipunchers);
+        //            if (!StackpanelForSpeedInformation.Children.Contains(MultipunchTime))
+        //                StackpanelForSpeedInformation.Children.Add(MultipunchTime);
+        //            break;
+        //        default:
+        //            StackpanelForSpeedInformation.Children.Remove(NumberOfMultipunchers);
+        //            StackpanelForSpeedInformation.Children.Remove(MultipunchTime);
+        //            break;
+        //    }
+        //}          
 
         #region initializing BlockType class for combobox itemsource
         private static ObservableCollection<BlockType> GetBlockTypes()

@@ -48,5 +48,22 @@ namespace BlockConditionsWindow.View
                     return new UserControl();
             }
         } 
+
+        static public UserControl SpeedInformation(Model.BlockConditions BCs)
+        {
+            switch(BCs.BlockType)
+            {
+                case "":
+                    return new UserControl();
+                case "030":
+                case "031":
+                case "032":
+                case "033":
+                case "034":
+                    return new SpeedInformationUC.SpeedInformation_2();
+                default:
+                    return new SpeedInformationUC.SpeedInformation_1();
+            }
+        }
     }
 }

@@ -67,6 +67,17 @@ namespace BlockConditionsWindow.ViewModel
             }
         }
 
+        private UserControl _speedInformationUC;
+        public UserControl SpeedInformationUC
+        {
+            get { return _speedInformationUC; }
+            set
+            {
+                _speedInformationUC = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #region Implement List<BlockType> blockTypes
         private List<BlockType> blockTypes = GetBlockTypes();
         public List<BlockType> BlockTypes
@@ -121,7 +132,6 @@ namespace BlockConditionsWindow.ViewModel
                 }
             }
         }
-
         #endregion
 
         #region Constructor
@@ -341,15 +351,9 @@ namespace BlockConditionsWindow.ViewModel
         {
             if (CurrentblockConditionModel.BlockType!="")
             {
-                //Position Information
                 PositionInformationUC=View.UserControlSimpleFactory.PositionInformation(CurrentblockConditionModel);
-                
-
-                //Speed Information
-                //InstantiatingSpeedinformation(obj.BlockTypeIDcode);
-
-                //Size Information               
                 SizeInformationUC = View.UserControlSimpleFactory.SizeInformation(CurrentblockConditionModel);
+                SpeedInformationUC = View.UserControlSimpleFactory.SpeedInformation(CurrentblockConditionModel);
 
             }
             else //when (obj.BlockTypeIDcode==""), clear stackpanel of Position and Size
