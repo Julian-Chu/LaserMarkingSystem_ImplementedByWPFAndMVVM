@@ -21,6 +21,16 @@ namespace BlockConditionsWindow.ViewModel
         {
             this.sp = sp;
         }
+
+        public KeyenceCommunicationService()
+        {
+            this.sp = new SerialPort();
+        }
+
+        public void SetSerialPort(SerialPort sp)
+        {
+            this.sp = sp;
+        }
         
         public void Upload(BlockConditionsWindow.Model.BlockConditions bCs)
         {

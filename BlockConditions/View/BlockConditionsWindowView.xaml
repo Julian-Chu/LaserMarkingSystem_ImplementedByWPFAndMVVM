@@ -71,7 +71,7 @@
             <Setter Property="MaxHeight" Value="25"/>
         </Style>
     </Window.Resources>
-        
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -81,7 +81,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" >
@@ -94,10 +94,10 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
             <Label Style="{StaticResource Label_2}">Block No.</Label>
             <Button Name="BlockNumberDecrement" MinWidth="20" Height="25" Content="&lt;" Command="{Binding Path=PreviousBlockNumber}"/>
-            <TextBox Name="BlockNumber"  Width="50" Margin="2"  Text="{Binding Path=CurrentblockConditionModel.BlockNo, Mode=OneWay}"/>
+            <TextBox Name="BlockNumber"  Width="50" Margin="2"  Text="{Binding Path=CurrentblockConditionModel.BlockNo, Mode=TwoWay,UpdateSourceTrigger=Default}"/>
             <Button Name="BlockNumberIncrement" MinWidth="20" Height="25" Content="&gt;" Command="{Binding Path=NextBlockNumber}"/>
             <!--<Button Name="BlockNumberIncrement" MinWidth="20" Height="25" Content="&gt;" Click="BlockNumberIncrement_Click"/>-->
-            
+
             <!-- old version: BlockNo Textbox bind with class<TextBox Name="BlockNumber" Width="50" Margin="2" Text="{Binding Path=BlockNo,Mode=TwoWay}" TextChanged="BlockNo_TextChanged"/>
             -->
         </StackPanel>
@@ -105,29 +105,29 @@
             <Label Style="{StaticResource Label_2}">Block 3D Shape</Label>
             <TextBox Width="50" Margin="2" Text="{Binding Path=CurrentblockConditionModel.Block3DShape, Mode=OneWay}" IsEnabled="False"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.Column="0">
-            <Label Style="{StaticResource Label_2}" MinWidth="80" Width="58">Block Type</Label>
-            <ComboBox Name="CB_BlockType" ItemsSource="{Binding Path=BlockTypes}" SelectedItem="{Binding Path=ComboboxSelectedItem}" HorizontalAlignment="Left"   Margin="1" VerticalAlignment="Center" MinWidth="110" />
-            
-            
+        <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.Column="0" >
+            <Label Style="{StaticResource Label_2}" MinWidth="70" >Block Type</Label>
+            <ComboBox Name="CB_BlockType" ItemsSource="{Binding Path=BlockTypes}" SelectedItem="{Binding Path=ComboboxSelectedItem,Mode=TwoWay}" HorizontalAlignment="Left"   Margin="1" VerticalAlignment="Center" MinWidth="110" />
+
+
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-            <Label Style="{StaticResource Label_2}">String information</Label>
+            <Label Style="{StaticResource Label_2}" Margin="1">String information</Label>
             <TextBox Width="350" Text="{Binding Path=CurrentblockConditionModel.CharacterStringInformation,Mode=TwoWay}" FontSize="16"/>
         </StackPanel>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="0">
-            <StackPanel Orientation="Vertical" Name="StackPanelForPositionInformation" MinHeight="150" MinWidth="200" Grid.Column="0">
+            <StackPanel Orientation="Vertical" Name="StackPanelForPositionInformation" MinHeight="150" MinWidth="200" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <ContentControl  Content="{Binding Path=PositionInformationUC}"/>
             </StackPanel>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="1">
-            <StackPanel Orientation="Vertical" Name="StackPanelForSizeInformation" MinHeight="150" MinWidth="250">
-                <ContentControl Content="{Binding Path=SizeInformationUC}"/>
-            </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="1" >
+        <StackPanel  Grid.Row="2" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Name="StackPanelForSizeInformation" MinHeight="150" MinWidth="250" >
+            <ContentControl Content="{Binding Path=SizeInformationUC}"/>            
+        </StackPanel>
         </Border>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="2">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Row="3" Name="StackpanelForSpeedInformation">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Row="3" Name="StackpanelForSpeedInformation" VerticalAlignment="Top">
                 <ContentControl Content="{Binding Path=SpeedInformationUC}"/>
             </StackPanel>
         </Border>

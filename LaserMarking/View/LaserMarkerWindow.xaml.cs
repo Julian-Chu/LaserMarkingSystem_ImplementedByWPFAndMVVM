@@ -26,13 +26,13 @@ namespace LaserMarking.View
     {
         SerialPort sp;
         SerialPort spForTesting;
-        Model.OperationWithSerialport _operationWithSerialport;        
-        
-        static readonly object _locker = new object();        
-        TrayMatrix[] trayMatrix;        
+        Model.OperationWithSerialport _operationWithSerialport;
+
+        static readonly object _locker = new object();
+        TrayMatrix[] trayMatrix;
         CommonMarkingConditionsModule.Model.CommonMarkingConditionsWithSerialPort _commonMarkingConditions;
-        BlockConditionsWindow.Model.BlockConditionsWithSerialPort _blockConditions;
-        List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> _blockConditionsList;
+        BlockConditionsWindow.Model.BlockConditions _blockConditions;
+        List<BlockConditionsWindow.Model.BlockConditions> _blockConditionsList;
 
         public LaserMarkerWindow()
         {
@@ -40,7 +40,7 @@ namespace LaserMarking.View
             ReadSerialNumberAndProgramNoFromDefaultSetting();
 
             //Initial the final serial number=first serial number+35
-            EndSerialNumber_2.Text = (int.Parse(StartSerialNumber_2.Text) + int.Parse(Qty.Text)-1).ToString();
+            EndSerialNumber_2.Text = (int.Parse(StartSerialNumber_2.Text) + int.Parse(Qty.Text) - 1).ToString();
             //pass the grid as the board to generate button ,textbox and image objects
             GeneratingTrayMatrix(TrayGrid);
             // spForTesting = new SerialPort("COM25", 38400, Parity.None, 8, StopBits.One);
@@ -65,27 +65,26 @@ namespace LaserMarking.View
 
             _operationWithSerialport = new Model.OperationWithSerialport(sp, LB1);
             _commonMarkingConditions = new CommonMarkingConditionsModule.Model.CommonMarkingConditionsWithSerialPort(sp);
-            _blockConditions = new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(sp);
-
- 
-        }       
+            _blockConditions = new BlockConditionsWindow.Model.BlockConditions();
+           // _blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditions>();
+        }
 
         void spForTesting_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             SerialPort spForTesting = sender as SerialPort;
-            string response=spForTesting.ReadExisting();
-            if(response=="RE\r\n")
+            string response = spForTesting.ReadExisting();
+            if (response == "RE\r\n")
             {
                 spForTesting.Close();
                 spForTesting.Open();
-                spForTesting.WriteLine("RE,0\r");                
+                spForTesting.WriteLine("RE,0\r");
             }
             MessageBox.Show(response);
         }
 
         async private void StartMarkingBtn_Click(object sender, RoutedEventArgs e)
         {
-                        //messages in Listbox 
+            //messages in Listbox 
             #region
             /*
             #region
@@ -133,9 +132,9 @@ namespace LaserMarking.View
                 }
             }
              */
-            #endregion            
+            #endregion
 
-            Button btn= sender as Button;
+            Button btn = sender as Button;
             btn.IsEnabled = false;
             #region
             /*
@@ -159,23 +158,23 @@ namespace LaserMarking.View
             _timer.Start();
              * */
             #endregion
-            
+
             await _operationWithSerialport.StartMarkingProcess();
-            
+
             btn.IsEnabled = true;
-        }                
+        }
 
         private void SwitchToOptions(object sender, RoutedEventArgs e)
         {
             var newWindow = new Window1();
             newWindow.ShowDialog();
             //newWindow.Focus();
-        } 
+        }
 
         private void CommonMarkingConditionsWindow_Click(object sender, RoutedEventArgs e)
         {
             //string _currentProgramNumber=MainProgramNo.Text;
-            var commonMarkingConditionsWindow = new CommonMarkingConditionsModule.View.CommonMarkingConditionsWindow(MainProgramNo.Text,sp);
+            var commonMarkingConditionsWindow = new CommonMarkingConditionsModule.View.CommonMarkingConditionsWindow(MainProgramNo.Text, sp);
 
             try
             {
@@ -192,9 +191,10 @@ namespace LaserMarking.View
                 }
                 else MessageBox.Show("ProgramNo Setting is cancelled!");
             }
-            catch (IOException ex) { 
-                MessageBox.Show(ex.Message); 
-            //TODO  Recall RS232 port
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message);
+                //TODO  Recall RS232 port
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
             finally
@@ -206,7 +206,7 @@ namespace LaserMarking.View
 
         private void SettingSerialNumber_Click(object sender, RoutedEventArgs e)
         {
-            var settingSerialNumber = new SettingSerialNumber(this.SerialNumber_1.Text,this.StartSerialNumber_2.Text);
+            var settingSerialNumber = new SettingSerialNumber(this.SerialNumber_1.Text, this.StartSerialNumber_2.Text);
             //settingSerialNumber.SN1pass2MainWin = this.SerialNumber_1.Text;
 
             //settingSerialNumber.ShowDialog();
@@ -214,7 +214,7 @@ namespace LaserMarking.View
             {
                 this.SerialNumber_1.Text = settingSerialNumber.SN1pass2MainWin;
                 this.StartSerialNumber_2.Text = settingSerialNumber.SN2pass2MainWin;
-                this.EndSerialNumber_2.Text = (int.Parse(StartSerialNumber_2.Text)+int.Parse(Qty.Text)-1).ToString();
+                this.EndSerialNumber_2.Text = (int.Parse(StartSerialNumber_2.Text) + int.Parse(Qty.Text) - 1).ToString();
                 OrganizeTheSerialNumber();
 
                 ///Save new SerialNumber to default 
@@ -225,12 +225,12 @@ namespace LaserMarking.View
 
             ///cancel the serial number 
             else
-                MessageBox.Show("SN Setting is cancelled!");            
+                MessageBox.Show("SN Setting is cancelled!");
         }
 
         bool[] IsButtonPressed = new bool[36];
         string[] SNForButtons = new string[36];
-        
+
         /// <summary>
         /// generate the button by thr row and column of grid with SN number
         /// </summary>
@@ -238,23 +238,23 @@ namespace LaserMarking.View
 
         #region TrayGenerator
         private void GeneratingTrayMatrix(Grid grid)
-        {            
+        {
             int row = grid.RowDefinitions.Count;
             int column = grid.ColumnDefinitions.Count;
-            
+
             trayMatrix = new TrayMatrix[row * column];
 
             int CurrentItemIndex = 0;
 
-            for(int i=0;i<row;i++)
-                for(int j=0;j<column;j++)
+            for (int i = 0; i < row; i++)
+                for (int j = 0; j < column; j++)
                 {
                     trayMatrix[CurrentItemIndex] = new TrayMatrix();
-                  
-                    trayMatrix[CurrentItemIndex].Name = "AF" + (CurrentItemIndex+1).ToString();
+
+                    trayMatrix[CurrentItemIndex].Name = "AF" + (CurrentItemIndex + 1).ToString();
                     trayMatrix[CurrentItemIndex].Tag = CurrentItemIndex;
                     trayMatrix[CurrentItemIndex].Click += new System.Windows.RoutedEventHandler(TransparentButtonBackground);
-                
+
                     /* Another way
                     trayMatrix[CurrentItemIndex].Click += (s, e) =>
                     {
@@ -284,7 +284,7 @@ namespace LaserMarking.View
                     IsButtonPressed[CurrentItemIndex] = true;
                     SNForButtons[CurrentItemIndex] = "";
 
-                    CurrentItemIndex += 1;                        
+                    CurrentItemIndex += 1;
                 }
             OrganizeTheSerialNumber();
         }
@@ -297,7 +297,7 @@ namespace LaserMarking.View
                 button.Background = Brushes.Transparent;
                 IsButtonPressed[int.Parse(button.Tag.ToString())] = true;
                 button.Content = null;
-              //  button.Content = Grid.GetColumn(button).ToString()+","+Grid.GetRow(button).ToString();
+                //  button.Content = Grid.GetColumn(button).ToString()+","+Grid.GetRow(button).ToString();
                 OrganizeTheSerialNumber();
             }
             else
@@ -305,11 +305,11 @@ namespace LaserMarking.View
                 button.Background = Brushes.AliceBlue;
                 IsButtonPressed[int.Parse(button.Tag.ToString())] = false;
                 OrganizeTheSerialNumber();
-                button.Content = button.Name;               
+                button.Content = button.Name;
             }
-                
+
         }
-     
+
         private void OrganizeTheSerialNumber()
         {
             int start = int.Parse(StartSerialNumber_2.Text);
@@ -323,18 +323,18 @@ namespace LaserMarking.View
                 start += 1;
             } while (start <= end);
 
-            int index=0;
-            int SerialNumberArrayIndex=0;
-            for(int i=0;i<6;i++)
-                for(int j=0;j<6;j++)
+            int index = 0;
+            int SerialNumberArrayIndex = 0;
+            for (int i = 0; i < 6; i++)
+                for (int j = 0; j < 6; j++)
                 {
-                    if (IsButtonPressed[index] == true && SerialNumberArrayIndex<serialNumberArray.Count)
+                    if (IsButtonPressed[index] == true && SerialNumberArrayIndex < serialNumberArray.Count)
                     {
                         //when Button is clicked, organize the serial number and assgin to textbox
 
                         //trayMatrix[index].Content = serialNumberArray[SerialNumberArrayIndex];
                         trayMatrix[index].textbox1.Text = SerialNumber_1.Text;
-                        trayMatrix[index].textbox2.Text = serialNumberArray[SerialNumberArrayIndex];                        
+                        trayMatrix[index].textbox2.Text = serialNumberArray[SerialNumberArrayIndex];
                         SerialNumberArrayIndex += 1;
                     }
                     else
@@ -355,11 +355,11 @@ namespace LaserMarking.View
             int EndSN2;
             int StartSN2 = int.Parse(StartSerialNumber_2.Text);
             int quantity = int.Parse(Qty.Text);
-            if (int.TryParse(EndSerialNumber_2.Text, out EndSN2) == true && quantity>1)
+            if (int.TryParse(EndSerialNumber_2.Text, out EndSN2) == true && quantity > 1)
             {
                 quantity -= 1;
                 Qty.Text = quantity.ToString();
-                EndSerialNumber_2.Text = (StartSN2+quantity-1).ToString();
+                EndSerialNumber_2.Text = (StartSN2 + quantity - 1).ToString();
                 OrganizeTheSerialNumber();
             }
             else
@@ -369,24 +369,24 @@ namespace LaserMarking.View
         private void IncreaseSerialNumber2_Click(object sender, RoutedEventArgs e)
         {
             int EndSerialNumber2;
-            int StartSerialNumber2=int.Parse(StartSerialNumber_2.Text);
+            int StartSerialNumber2 = int.Parse(StartSerialNumber_2.Text);
             int quantity = int.Parse(Qty.Text);
             if (int.TryParse(EndSerialNumber_2.Text, out EndSerialNumber2) == true && quantity < 36)
             {
                 quantity += 1;
                 Qty.Text = quantity.ToString();
-                EndSerialNumber_2.Text = (StartSerialNumber2+ quantity-1).ToString();
+                EndSerialNumber_2.Text = (StartSerialNumber2 + quantity - 1).ToString();
                 OrganizeTheSerialNumber();
             }
             else
-                return;            
+                return;
         }
 
         /// <summary>
         /// create a TrayMatrix class derived from Button,
         /// Add 1 dockpanel, 1 image , 1 stackpanel and 2 textboxes for each sample.
         /// </summary>
-        public class TrayMatrix:Button
+        public class TrayMatrix : Button
         {
 
             public Image image;
@@ -396,18 +396,18 @@ namespace LaserMarking.View
             public StackPanel stackPanel;
 
             public TrayMatrix()
-            {                
+            {
                 dockPanel = new DockPanel();
-                dockPanel.LastChildFill=true;
+                dockPanel.LastChildFill = true;
                 dockPanel.Margin = new Thickness(2);
                 dockPanel.Background = Brushes.Salmon;
                 //Contruct the image box, assign file to image and set position to the dockpanel
                 image = new Image();
                 image.MinWidth = 20;
                 image.Width = 40;
-                image.Margin = new Thickness(5,0,0,0);
+                image.Margin = new Thickness(5, 0, 0, 0);
                 var uri = new Uri("pack://application:,,,/images/2DCode.png");
-                BitmapImage Barcode=new BitmapImage();
+                BitmapImage Barcode = new BitmapImage();
                 Barcode.BeginInit();
                 Barcode.UriSource = uri;
                 Barcode.EndInit();
@@ -422,9 +422,9 @@ namespace LaserMarking.View
                 stackPanel.Background = Brushes.Transparent;
                 stackPanel.Margin = new Thickness(2);
                 dockPanel.Children.Add(stackPanel);
-            
+
                 //Construct the textbox for serial number1 and 2
-                textbox1=new TextBox();
+                textbox1 = new TextBox();
                 textbox1.MinHeight = 20;
                 textbox1.MinWidth = 40;
 
@@ -436,7 +436,7 @@ namespace LaserMarking.View
                 stackPanel.Children.Add(textbox1);
 
                 textbox2 = new TextBox();
-                textbox2.MinHeight=20;
+                textbox2.MinHeight = 20;
                 textbox2.MinWidth = 15;
                 textbox2.Background = Brushes.LemonChiffon;
                 textbox2.Margin = new Thickness(3);
@@ -452,27 +452,28 @@ namespace LaserMarking.View
 
         private void BlockCondition_Click(object sender, RoutedEventArgs e)
         {
-            var BlockConditionWin = new BlockConditionsWindow.View.BlockConditionsWindowView(sp);
-            BlockConditionWin._CurrentblockConditionController.ProgramNo = MainProgramNo.Text;
-            BlockConditionWin.blockConditionControllerList = this._blockConditionsList;
+            var BlockConditionWin = new BlockConditionsWindow.View.BlockConditionsWindowView();
+            if (this._blockConditionsList != null)
+                BlockConditionWin.ViewModel.BlockConditionModelList = this._blockConditionsList;
+            BlockConditionWin.ViewModel.CurrentblockConditionModel.ProgramNo = MainProgramNo.Text;
             try
             {
                 BlockConditionWin.ShowDialog();
-                if(BlockConditionWin.DialogResult.HasValue && BlockConditionWin.DialogResult.Value)
+                if (BlockConditionWin.DialogResult.HasValue && BlockConditionWin.DialogResult.Value)
                 {
-                    this._blockConditionsList = BlockConditionWin.blockConditionControllerList;
+                    this._blockConditionsList = BlockConditionWin.ViewModel.BlockConditionModelList;
                 }
             }
             catch (IOException ex) { MessageBox.Show(ex.Message); }
-            catch(Exception ex){MessageBox.Show(ex.Message);}
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
             finally { BlockConditionWin.Close(); }
         }
-        
+
         private void Test1_Click(object sender, RoutedEventArgs e)
         {
             var _testingWindow = new Testing();
-            _testingWindow.ShowDialog();            
+            _testingWindow.ShowDialog();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -480,13 +481,13 @@ namespace LaserMarking.View
             Ready.Fill = Brushes.Lime;
             Stanby.Fill = Brushes.Yellow;
             Stop.Fill = Brushes.Red;
-        }       
+        }
 
         private void SaveSettingAsXML_Click(object sender, RoutedEventArgs e)
         {
-            List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort> blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditionsWithSerialPort>{
-                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="0"},
-                new BlockConditionsWindow.Model.BlockConditionsWithSerialPort(){BlockNo="1"}
+            List<BlockConditionsWindow.Model.BlockConditions> blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditions>{
+                new BlockConditionsWindow.Model.BlockConditions(){BlockNo="0"},
+                new BlockConditionsWindow.Model.BlockConditions(){BlockNo="1"}
             };
             SerializationAndDeserialzation SAD = new SerializationAndDeserialzation();
             SAD.Serialize(_commonMarkingConditions, blockConditionsList);
@@ -498,15 +499,15 @@ namespace LaserMarking.View
             SAD = SAD.Deserialize();
             this._blockConditionsList = SAD.blockConditionsList;
             this._commonMarkingConditions = SAD.commonMarkingConditions;
-            
+
         }
 
         private void TryAvailablePorts()
         {
             string[] ports = SerialPort.GetPortNames();
-            
 
-            foreach(string port in ports)
+
+            foreach (string port in ports)
             {
                 sp = new SerialPort(port, 38400, Parity.None, 8, StopBits.One);
                 try
@@ -514,7 +515,7 @@ namespace LaserMarking.View
                     sp.Close();
                     sp.Open();
                 }
-                catch(IOException)
+                catch (IOException)
                 { continue; }
                 break;
             }
@@ -523,7 +524,7 @@ namespace LaserMarking.View
 
 
 
-        
+
 
     }
 }

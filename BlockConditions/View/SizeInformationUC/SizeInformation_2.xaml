@@ -17,7 +17,7 @@
             <Setter Property="MaxHeight" Value="25"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -45,59 +45,59 @@
 
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Code Type"/>
-            <TextBox Text="{Binding Path=CodeType,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.CodeType,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Quiet Zone Width"/>
-            <TextBox Text="{Binding QuietZoneWidth,Mode=TwoWay}"/>
+            <TextBox Text="{Binding CurrentblockConditionModel.QuietZoneWidth,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Barcode Height"/>
-            <TextBox Text="{Binding Path=BarcodeHeight,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.BarcodeHeight,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="QR mode/Check digit"/>
-            <TextBox Text="{Binding Path=QRmode_CheckDigit,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.QRmode_CheckDigit,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="QR Password Valid/Invalid"/>
-            <TextBox Text="{Binding Path=QRPasswordValid_Invalid,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.QRPasswordValid_Invalid,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="QR Password"/>
-            <TextBox Text="{Binding Path=QRPassword,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.QRPassword,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Error Correction Rate"/>
-            <TextBox Text="{Binding Path=ErrorCorrectionRate,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.ErrorCorrectionRate,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Mark Width"/>
-            <TextBox Text="{Binding Path=MarkWidth,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.MarkWidth,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Barcode Thin Line Width&#10;/2D Code Cell Size"/>
-            <TextBox Text="{Binding Path=BarcodeThinLineWidth_2DCodeCellSize,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.BarcodeThinLineWidth_2DCodeCellSize,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Barcode Thick/Thin ratio&#10;/QR version/Symbol Size" MinHeight="40"/>
-            <TextBox Text="{Binding Path=BarcodeThick_ThinRatio_QRVersion_SymbolSize,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.BarcodeThick_ThinRatio_QRVersion_SymbolSize,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="11" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Cell fine adjustment value&#10;(Narrow width djustment line)&#10;/Fine Adjustment Value"/>
-            <TextBox Text="{Binding Path=CellFineAdjustmentValue,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.CellFineAdjustmentValue,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="12" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Scan Speed Fine Adjustment Value"/>
-            <TextBox Text="{Binding Path=ScanSpeedFineAdjustmentValue,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.ScanSpeedFineAdjustmentValue,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="13" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Marking Power Fine Adjustment Value"/>
-            <TextBox Text="{Binding Path=MarkingPowerFineAdjustmentValue,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.MarkingPowerFineAdjustmentValue,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="14" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Q switch frequency adjustment value&#10;(Frequency adjustment value)"/>
-            <TextBox Text="{Binding Path=QswitchFrequencyAdjustmentValue,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.QswitchFrequencyAdjustmentValue,Mode=TwoWay}"/>
         </StackPanel>
 
 

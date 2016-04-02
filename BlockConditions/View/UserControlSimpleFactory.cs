@@ -21,13 +21,13 @@ namespace BlockConditionsWindow.View
                 case "000":
                 case "001":
                 case "030":
-                    return new PositionInformationUC.PositionInformation_1(BCs);
+                    return new PositionInformationUC.PositionInformation_1_1(BCs);
                 case "009":
                 case "020":
                 case "031":
-                    return new PositionInformationUC.PositionInformation_2(BCs);
+                    return new PositionInformationUC.PositionInformation_1_2(BCs);
                 default:
-                    return new PositionInformationUC.PositionInformation_3(BCs);
+                    return new PositionInformationUC.PositionInformation_6(BCs);
             }
         }
 
@@ -47,6 +47,7 @@ namespace BlockConditionsWindow.View
                 default:
                     return new UserControl();
             }
+            
         } 
 
         static public UserControl SpeedInformation(Model.BlockConditions BCs)

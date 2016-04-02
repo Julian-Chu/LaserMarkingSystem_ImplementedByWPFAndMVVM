@@ -17,7 +17,7 @@
             <Setter Property="MaxHeight" Value="25"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -41,43 +41,43 @@
 
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Line Type"/>
-            <TextBox Text="{Binding Path=LineType}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.LineType ,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Font No."/>
-            <TextBox Text="{Binding Path=FontNo}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.FontNo,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Character Height"/>
-            <TextBox Text="{Binding Path=CharacterHeight,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.CharacterHeight,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Character Width"/>
-            <TextBox Text="{Binding Path=CharacterWidth,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.CharacterWidth,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Skip Cross"/>
-            <TextBox Text="{Binding Path=SkipCross,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.SkipCross,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Number of Lines/&#10;Overlap Rate"/>
-            <TextBox Text="{Binding Path=NumberOfLine,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.NumberOfLine,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Thick Line Width"/>
-            <TextBox Text="{Binding Path=ThickLineWidth,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.ThickLineWidth,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Target of Quick &#10;Change of Character"/>
-            <TextBox Text="{Binding Path=TargetOfQuickChangeOfCharacter,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.TargetOfQuickChangeOfCharacter,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Regular Pitch &#10;Layout Flag"/>
-            <TextBox Text="{Binding Path=RegularPitchLayoutFlag,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.RegularPitchLayoutFlag,Mode=TwoWay}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Label Content="Character Pitch&#10;/Full Length&#10;/Pitch Angle&#10;/Opening Angle" MinHeight="40"/>
-            <TextBox Text="{Binding Path=CharacterPitch_FullLength_PitchAngle_OpeningAngle,Mode=TwoWay}"/>
+            <TextBox Text="{Binding Path=CurrentblockConditionModel.CharacterPitch_FullLength_PitchAngle_OpeningAngle,Mode=TwoWay}"/>
         </StackPanel>
 
 

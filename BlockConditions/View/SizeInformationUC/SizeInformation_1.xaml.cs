@@ -28,7 +28,7 @@ namespace BlockConditionsWindow.View.SizeInformationUC
         public SizeInformation_1(Model.BlockConditions blockConditionsModel)
         {
             InitializeComponent();
-            DataContext = blockConditionsModel;
+            
         }
     }
 }

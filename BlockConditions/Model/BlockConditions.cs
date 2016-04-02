@@ -39,9 +39,16 @@ namespace BlockConditionsWindow.Model
             {
                 int result;
                 if (int.TryParse(value, out result) == true && result <= 255 && result >= 0)
+                {
                     _blockNo = value;
+                    NotifyPropertyChanged();
+                }
                 else
+                {
+                    NotifyPropertyChanged();
                     throw new ArgumentOutOfRangeException("Please input BlockNo. 000~255");
+
+                }
                     //MessageBox.Show("Please input BlockNo. 000~255");
                 
             }
@@ -62,6 +69,7 @@ namespace BlockConditionsWindow.Model
             {
                 switch (value)
                 {
+                    case "":
                     case "000":
                     case "001":
                     case "002":

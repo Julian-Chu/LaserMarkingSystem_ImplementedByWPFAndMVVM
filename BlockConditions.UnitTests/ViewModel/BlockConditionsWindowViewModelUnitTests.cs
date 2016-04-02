@@ -30,7 +30,7 @@ namespace BlockConditionsWindow.ViewModel.UnitTests
             //Assign            
             ViewModel = new BlockConditionsWindowViewModel();
             obj = ViewModel.CurrentblockConditionModel as BlockConditions;
-            ViewModel.BlockTypeChangedEvent -= ViewModel.ChangeUserControl;
+
             string actual;
             string expect;
             //Act
@@ -73,6 +73,23 @@ namespace BlockConditionsWindow.ViewModel.UnitTests
             expectIndex = Convert.ToString(ViewModel.BlockConditionModelList.Count - 1);
             //Assert
             Assert.AreEqual(expectIndex, actualIndex);
+        }
+
+        [Test]
+        public void ToNextBlockNumber_OutOfIndexThenAddItem_AddedNewItemWhichHasTheSameProgramNo()
+        {
+            //Assign
+            ViewModel = new BlockConditionsWindowViewModel();
+            ViewModel._dialogService = new MockDialogServiceAlwaysYes();
+            string actual;
+            string expect;
+            //Act
+            ViewModel.CurrentblockConditionModel.ProgramNo = "0010";
+            ViewModel.ToNextBlockNumber();
+            actual = ViewModel.CurrentblockConditionModel.ProgramNo;
+            expect = "0010";
+            //Assert
+            Assert.AreEqual(expect, actual);
         }
 
         [Test]
