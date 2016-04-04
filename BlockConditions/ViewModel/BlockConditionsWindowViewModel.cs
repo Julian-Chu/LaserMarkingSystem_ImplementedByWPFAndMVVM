@@ -131,7 +131,8 @@ namespace BlockConditionsWindow.ViewModel
                     _comboboxSelectedItem = value;
                     CurrentblockConditionModel.BlockType = value.BlockTypeIDcode;
                 }
-                NotifyPropertyChanged("ComboboxSelectedItem");
+                //NotifyPropertyChanged("ComboboxSelectedItem");
+                NotifyPropertyChanged();
                 OnBlockTypeChanged();
             }
         }
@@ -184,13 +185,25 @@ namespace BlockConditionsWindow.ViewModel
 
         #region --Constructor--
         public BlockConditionsWindowViewModel()
-        {
-
-            
+        {            
             #region --Instantiating Interfaces
             _dialogService = new DialogServiceToAddNewBlockCondition();
             _keyenceCommunicationService = new KeyenceCommunicationService(new SerialPort("COM9", 38400, Parity.None, 8, StopBits.One));
+            //_keyenceCommunicationService = new MockKeyenceCommunicationService("K3,0,099,000,0000.827,0000.778,0000.00,0000,090.00,360.00,1,0.50,0.250,00000,01200,090.0,100,000,000,00,00,000.760,000.502,00.000,000,00.000,0,0,000.603,?O?R?T?f?P?Q?Q");
             #endregion
+            InitializingBlockConditionsWindowViewModel();
+        }
+        public BlockConditionsWindowViewModel(SerialPort sp)
+        {
+            #region --Instantiating Interfaces
+            _dialogService = new DialogServiceToAddNewBlockCondition();
+            _keyenceCommunicationService = new KeyenceCommunicationService(sp);
+            #endregion
+            InitializingBlockConditionsWindowViewModel();
+        }
+
+        private void InitializingBlockConditionsWindowViewModel()
+        {
             #region --Instantiating Commands--
             Set = new RelayCommand(obj => SetAsSetting(obj));
             Cancel = new RelayCommand(obj => CloseWindowWithoutSave(obj));
@@ -199,6 +212,7 @@ namespace BlockConditionsWindow.ViewModel
             Upload = new RelayCommand(obj => BlockConditionUpload());
             Download = new RelayCommand(obj => BlockConditionDownload());
             #endregion
+
             #region --InitialBlockCondition--
             if (_blockConditionModelList == null)
             {
@@ -211,22 +225,12 @@ namespace BlockConditionsWindow.ViewModel
 
             #region --Subscribing Events--
             BlockTypeChangedEvent += ChangeUserControl; //ToDo how to test it with raised UI?
-            //BlockTypeChangedEvent += BlockType_ChangedByBlockClass;
-            
+            //BlockTypeChangedEvent += BlockType_ChangedByBlockClass;            
             #endregion
             OnBlockTypeChanged();
         }
 
-        internal void AddNewBlockConditionInList()
-        {
-            _blockConditionModelList.Add(new Model.BlockConditions() { ProgramNo = BlockConditionModelList.Count != 0 ? BlockConditionModelList[0].ProgramNo : "0000", BlockNo = Convert.ToString(_blockConditionModelList.Count) });
-        }
-        internal void AddNewBlockConditionInList(BlockType blockType)
-        {
-            _blockConditionModelList.Add(new Model.BlockConditions() { ProgramNo = BlockConditionModelList.Count != 0 ? BlockConditionModelList[0].ProgramNo : "0000", BlockNo = Convert.ToString(_blockConditionModelList.Count) });
-            if(blockType!=null)
-                _blockConditionModelList.Last().BlockType = blockType.BlockTypeIDcode;
-        }
+
         #endregion
 
         #region --INotifyPropertyChanged Implement--
@@ -249,7 +253,8 @@ namespace BlockConditionsWindow.ViewModel
             {
                 CurrentblockConditionModel = BlockConditionModelList[_newIndex];
                 OnBlockTypeChanged();
-                ComboboxSelectedItem = BlockTypes.Single(i => i.BlockTypeIDcode == CurrentblockConditionModel.BlockType);
+                //ComboboxSelectedItem = BlockTypes.Single(i => i.BlockTypeIDcode == CurrentblockConditionModel.BlockType);
+                BlockType_ChangedByBlockClass();
             }
             else if (_dialogService.ShowMessageBox("Add new BlockCondition?", "Warning", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -271,8 +276,10 @@ namespace BlockConditionsWindow.ViewModel
         {
             if (_dialogService.ShowMessageBox("Continue data downloading from controller", "Confirm Window", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                _keyenceCommunicationService.Download(CurrentblockConditionModel);
+                _keyenceCommunicationService.Download(_currentblockConditionModel);
+                OnBlockTypeChanged();
                 BlockType_ChangedByBlockClass();
+                _comboboxSelectedItem = BlockTypes.Single(i => i.BlockTypeIDcode == CurrentblockConditionModel.BlockType);
             }
         }
 
@@ -295,40 +302,7 @@ namespace BlockConditionsWindow.ViewModel
         }
         #endregion
 
-        #region --Other Methods--
-        //internal void BlockType_ChangedByBlockClass(Model.BlockConditions blockCondition)
-        //{
-        //    switch (blockCondition.BlockType)
-        //    {
-        //        case "000":
-        //            ComboboxSelectedItem = blockTypes[(int)BlockTypeID.HorizontalMarking];
-        //            break;
-        //        case "001":
-        //            ComboboxSelectedItem = blockTypes[(int)BlockTypeID.VerticalMarking];
-        //            break;
-        //        case "009":
-        //            ComboboxSelectedItem = blockTypes[(int)BlockTypeID.Barcode2DCode];
-        //            break;
-        //        case "020":
-        //            ComboboxSelectedItem = blockTypes[(int)BlockTypeID.GS1Databar];
-        //            break;
-        //        case "030":
-        //            ComboboxSelectedItem = blockTypes[(int)BlockTypeID.DotCharacter];
-        //            break;
-        //        case "031":
-        //            ComboboxSelectedItem = blockTypes[(int)BlockTypeID.Dot2DCode];
-        //            break;
-        //        case "-02":
-        //            ComboboxSelectedItem = blockTypes[(int)BlockTypeID.WorkpieceImageLogo];
-        //            break;
-        //        default:
-        //            ComboboxSelectedItem = blockTypes[(int)BlockTypeID.empty];
-        //            break;
-        //    }
-        //    NotifyPropertyChanged("ComboboxSelectedItem");
-        //    //OnBlockTypeChanged();
-        //}
-
+        #region --Other Methods--        
         internal void BlockType_ChangedByBlockClass()
         {
             switch (_currentblockConditionModel.BlockType)
@@ -362,7 +336,6 @@ namespace BlockConditionsWindow.ViewModel
             //OnBlockTypeChanged();
         }
 
-
         public event EventHandler BlockTypeChangedEvent;
         public void OnBlockTypeChanged()
         {
@@ -377,6 +350,16 @@ namespace BlockConditionsWindow.ViewModel
             SpeedInformationUC = View.UserControlSimpleFactory.SpeedInformation(CurrentblockConditionModel);
         }
 
+        internal void AddNewBlockConditionInList()
+        {
+            _blockConditionModelList.Add(new Model.BlockConditions() { ProgramNo = BlockConditionModelList.Count != 0 ? BlockConditionModelList[0].ProgramNo : "0000", BlockNo = Convert.ToString(_blockConditionModelList.Count) });
+        }
+        internal void AddNewBlockConditionInList(BlockType blockType)
+        {
+            _blockConditionModelList.Add(new Model.BlockConditions() { ProgramNo = BlockConditionModelList.Count != 0 ? BlockConditionModelList[0].ProgramNo : "0000", BlockNo = Convert.ToString(_blockConditionModelList.Count) });
+            if (blockType != null)
+                _blockConditionModelList.Last().BlockType = blockType.BlockTypeIDcode;
+        }
         #endregion
     }
 }

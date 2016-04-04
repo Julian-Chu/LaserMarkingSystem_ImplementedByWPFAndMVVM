@@ -87,7 +87,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" >
             <Label Style="{StaticResource Label_2}" MinWidth="80">Program No.</Label>
             <!--<TextBox Width="50" Margin="2" Text="{Binding Path=ProgramNo, Mode=OneWay}" IsEnabled="False"/>-->
-            <TextBox Width="50" Margin="2" Text="{Binding Path=CurrentblockConditionModel.ProgramNo, Mode=TwoWay}" IsEnabled="True"/>
+            <TextBox Width="50" Margin="2" Text="{Binding Path=CurrentblockConditionModel.ProgramNo, Mode=TwoWay}" IsReadOnly="True" IsEnabled="True"/>
             <TextBox MinWidth="20" Text="{Binding Path=CurrentblockConditionModel.BlockType,Mode=OneWay}" IsEnabled="False"/>
         </StackPanel>
 

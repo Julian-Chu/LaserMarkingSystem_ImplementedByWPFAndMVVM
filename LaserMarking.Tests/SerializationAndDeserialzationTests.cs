@@ -19,10 +19,10 @@ namespace LaserMarking.UnitTests
         public void Serialize_SerializeAndDeserialize_ReturnsTrue()
         {
             CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new CommonMarkingConditionsWithSerialPort();
-            List<BlockConditionsWithSerialPort> _blockConditionsList = new List<BlockConditionsWithSerialPort>()
+            List<BlockConditions> _blockConditionsList = new List<BlockConditions>()
             {
-                new BlockConditionsWithSerialPort(),
-                new BlockConditionsWithSerialPort(),    
+                new BlockConditions(),
+                new BlockConditions(),    
             };
             string input = "K1,0,0,0,0,0,0,0,000.50,0000.0,0000,0000.0,0000.000,0000.000,00,00001,0000.0,0000.0,00000,00000,2,1\r";
             _commonMarkingConditions.SettingFromLMController = input;

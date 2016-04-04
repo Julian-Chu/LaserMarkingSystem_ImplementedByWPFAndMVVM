@@ -53,7 +53,8 @@ namespace BlockConditionsWindow.ViewModel
             {
                 sp.Open();
                 sp.WriteLine(bCs.HeaderToRequestBlockCondition + "," + bCs.ProgramNo + "," + bCs.BlockNo + bCs.Delimiter);
-                Task.Delay(200);
+                var waitingForResponce=Task.Delay(250);
+                waitingForResponce.Wait();
                 string ReturnBlockCondition = sp.ReadExisting();
                 string[] BlockConditions = ReturnBlockCondition.Split(',');
 
@@ -81,6 +82,7 @@ namespace BlockConditionsWindow.ViewModel
 
     public class MockKeyenceCommunicationService : IKeyenceCommuniationService
     {
+        public string ReturnBlockCondition;
         public void Upload(Model.BlockConditions bCs)
         {
             
@@ -88,7 +90,19 @@ namespace BlockConditionsWindow.ViewModel
 
         public void Download(BlockConditionsWindow.Model.BlockConditions bCs)
         {
-           
+            string[] BlockConditions = ReturnBlockCondition.Split(',');
+
+            if (BlockConditions[1] == "0")
+            {
+                bCs.SortBlockConditions(ReturnBlockCondition);
+            }
+            else
+                throw new Exception("Error");
+        }
+
+        public MockKeyenceCommunicationService(string returnedBlockCondition)
+        {
+            this.ReturnBlockCondition = returnedBlockCondition;
         }
     }
 
