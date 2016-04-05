@@ -10,7 +10,7 @@ namespace BlockConditionsWindow.Model
     public class ErrorCode
     {
         // Identification code(2byte)+,+ IsError(0 or 1)+ ErrorCode
-        public bool NoErrorExists(string response)
+        public bool IsNoErrorExists(string response)
         {
             try
             {
@@ -22,33 +22,34 @@ namespace BlockConditionsWindow.Model
                     if (responseArray[0] == "EX")
                     {
                         string ErrMsg = ExtractExMsg(response);
-                        MessageBox.Show(ErrMsg);
-                        return false;
+                        throw new LaserMarkingErrorException(ErrMsg);
+                        //MessageBox.Show(ErrMsg);                        
                     }
                     else
                     {
                         string ErrMsg = CommunicationErrorMsg(response);
-                        MessageBox.Show(ErrMsg);
-                        return false;
+                        //MessageBox.Show(ErrMsg);
+                        throw new LaserMarkingErrorException(ErrMsg);                        
                     }
                 }
             }
+            catch (LaserMarkingErrorException e) { throw e; }
+            
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
-                return false;
+               // MessageBox.Show(e.Message);
+                throw e;
+                //return false;
             }
         }
 
         internal string CommunicationErrorMsg(string response)
         {
-
             try
             {
                 string[] responseArray = response.Split(',', '\r');
                 string IDcode = responseArray[0];
                 string _errorCode = responseArray[2];  //substract the error code
-
 
                 //_errorCode += IDcode +" : ";  //attach the ID code to ErrorCode
                 #region
@@ -573,7 +574,6 @@ namespace BlockConditionsWindow.Model
                     return _errorCode + ":" + "Laser Resonator High-Temperature Warning";
                 case "W143":
                     return _errorCode + ":" + "Laser Resonator Low-Temperature Warning";
-
                 case "T000":
                     return _errorCode + ":" + "Emergency Stop/Remote interlock in use";
                 case "T001":
@@ -598,7 +598,6 @@ namespace BlockConditionsWindow.Model
                     return _errorCode + ":" + "Oscillator temperature being adjusted";
                 case "T011":
                     return _errorCode + ":" + "Contactor input OFF";
-
                 ///---Communication Errors--///
                 case "S025":
                     return _errorCode + ":" + "Checksum Error";
@@ -626,5 +625,15 @@ namespace BlockConditionsWindow.Model
         {
             MessageBox.Show("Response Timeout");
         }
+    }
+
+    public class LaserMarkingErrorException : Exception 
+    {
+        public LaserMarkingErrorException():base()
+        { }
+
+        public LaserMarkingErrorException(string message)
+            : base(message)
+        { }
     }
 }

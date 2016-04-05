@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using BlockConditionsWindow.ViewModel;
 using NUnit.Framework;
 using BlockConditionsWindow.Model;
+using NSubstitute;
+using System.ComponentModel;
 
 namespace BlockConditionsWindow.ViewModel.UnitTests
 {
@@ -170,6 +172,32 @@ namespace BlockConditionsWindow.ViewModel.UnitTests
             expected = ViewModel.BlockConditionModelList[0].BlockNo;
             //Assert
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void BlockTypeChangedEvent_Raised_true()
+        {
+            //Assign
+            bool wasRaised = false;
+            ViewModel = new BlockConditionsWindowViewModel();
+            ViewModel.BlockTypeChangedEvent += (s, e) => wasRaised = true;
+            //Act
+            ViewModel.OnBlockTypeChanged();
+            //Assert
+            Assert.That(wasRaised);
+        }
+
+        [Test]
+        public void PropertyChanged_Raised_true()
+        {
+            //Assign
+            var sub = Substitute.For<INotifyPropertyChanged>();
+            bool wasRaised = false;            
+            //Act
+            sub.PropertyChanged += (s, e) => wasRaised = true;
+            sub.PropertyChanged += Raise.Event<PropertyChangedEventHandler>(this, new PropertyChangedEventArgs(""));
+            //Assert
+            Assert.That(wasRaised);
         }
 
 

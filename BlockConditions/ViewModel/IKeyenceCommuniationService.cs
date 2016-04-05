@@ -16,10 +16,12 @@ namespace BlockConditionsWindow.ViewModel
     public class KeyenceCommunicationService:IKeyenceCommuniationService
     {
         SerialPort sp;
+        Model.ErrorCode errorcode;
 
         public KeyenceCommunicationService(SerialPort sp)
         {
             this.sp = sp;
+            errorcode = new Model.ErrorCode();
         }
 
         public KeyenceCommunicationService()
@@ -38,6 +40,11 @@ namespace BlockConditionsWindow.ViewModel
             {
                 sp.Open();
                 sp.WriteLine(bCs.HeaderToSetBlockCondition + "," + bCs.ProgramNo + "," + bCs.BlockNo + "," + bCs.Setting + "," + bCs.Delimiter);
+                var waitingForResponce = Task.Delay(250);
+                waitingForResponce.Wait();
+                string ReturnBlockCondition = sp.ReadExisting();
+
+                errorcode.IsNoErrorExists(ReturnBlockCondition); //check return flag
             }
             catch (System.IO.IOException ex) { throw ex; }
             catch (Exception ex) { throw ex; }
@@ -50,7 +57,7 @@ namespace BlockConditionsWindow.ViewModel
         public void Download(BlockConditionsWindow.Model.BlockConditions bCs)
         {
             try
-            {
+            {               
                 sp.Open();
                 sp.WriteLine(bCs.HeaderToRequestBlockCondition + "," + bCs.ProgramNo + "," + bCs.BlockNo + bCs.Delimiter);
                 var waitingForResponce=Task.Delay(250);
@@ -58,15 +65,14 @@ namespace BlockConditionsWindow.ViewModel
                 string ReturnBlockCondition = sp.ReadExisting();
                 string[] BlockConditions = ReturnBlockCondition.Split(',');
 
-                if (BlockConditions[1] == "0")
+                if (errorcode.IsNoErrorExists(ReturnBlockCondition))//(BlockConditions[1] == "0")
                 {
                     bCs.SortBlockConditions(ReturnBlockCondition);
                 }
-                else
-                    throw new Exception("Error");
+               
             }
             catch (System.IO.IOException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
+            
             finally
             {
                 sp.Close();

@@ -987,20 +987,19 @@ namespace BlockConditionsWindow.Model
 
                 default:
 
-                    throw new Exception("Invalid BlockType!");
-                    
+                    throw new Exception("Invalid BlockType!");                    
             }
 
             PositionInformation = tempPositionInformation;
            // return CurrentIndex;
         }
 
-        virtual public string DownloadBlockConditions(string ProgramNo, string BlockNo) 
-        {
-            return "Null";
-        }
+        //virtual public string DownloadBlockConditions(string ProgramNo, string BlockNo) 
+        //{
+        //    return "Null";
+        //}
 
-        virtual public void UploadBlockConditions(string ProgramNo, string BlockNo) { }
+        //virtual public void UploadBlockConditions(string ProgramNo, string BlockNo) { }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
