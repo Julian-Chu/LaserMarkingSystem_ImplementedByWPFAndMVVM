@@ -60,7 +60,7 @@ namespace BlockConditionsWindow.ViewModel.UnitTests
             //Assign
             ViewModel = new BlockConditionsWindowViewModel();
             ViewModel._keyenceCommunicationService = new MockKeyenceCommunicationService(input);
-            ViewModel._dialogService = new MockDialogServiceAlwaysYes();
+            ViewModel._dialogService = new StubDialogServiceAlwaysYes();
             string actual;
             string expect;
             string[] inputStringArray = input.Split(',');
@@ -76,12 +76,13 @@ namespace BlockConditionsWindow.ViewModel.UnitTests
             Assert.AreEqual(expect, actual);
         }
 
+
         [Test]
-        public void ToNextBlockNumber_OutOfIndex_NoNewItemAndKeepCurrentBlock()
+        public void ToNextBlockNumber_OutOfIndexAndNoAddNewBlock_NoNewItemAndKeepCurrentBlock()
         {
             //Assign
             ViewModel = new BlockConditionsWindowViewModel();
-            ViewModel._dialogService=new MockDialogServiceAlwaysNo();
+            ViewModel._dialogService=new StubDialogServiceAlwaysNo();
             string actualIndex;
             string expectedIndex;
             //Act
@@ -97,7 +98,7 @@ namespace BlockConditionsWindow.ViewModel.UnitTests
         {
             //Assign
             ViewModel = new BlockConditionsWindowViewModel();
-            ViewModel._dialogService = new MockDialogServiceAlwaysYes();
+            ViewModel._dialogService = new StubDialogServiceAlwaysYes();
             string actualIndex;
             string expectIndex;
             //Act
@@ -113,7 +114,7 @@ namespace BlockConditionsWindow.ViewModel.UnitTests
         {
             //Assign
             ViewModel = new BlockConditionsWindowViewModel();
-            ViewModel._dialogService = new MockDialogServiceAlwaysYes();
+            ViewModel._dialogService = new StubDialogServiceAlwaysYes();
             string actual;
             string expect;
             //Act
