@@ -15,6 +15,7 @@ namespace LaserMarking.UnitTests
     [TestFixture()]
     public class SerializationAndDeserialzationTests
     {
+        [Ignore]
         [Test()]
         public void Serialize_SerializeAndDeserialize_ReturnsTrue()
         {

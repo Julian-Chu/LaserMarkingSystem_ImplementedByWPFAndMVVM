@@ -109,14 +109,17 @@
                 <MenuItem Command="ApplicationCommands.Cut"/>
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
-            <MenuItem Header="_Options"  Click="SwitchToOptions"/>
+            <MenuItem Header="Setting"  >
+                <MenuItem Header="Common Marking Conidtion"  Command="{Binding Path}" />
+                <MenuItem Header="Block Condition"/>
+            </MenuItem> 
             <MenuItem Header="Testing">
                 <MenuItem Name="Test1" Header="Test1" Click="Test1_Click"/>
             </MenuItem>
 
         </Menu>
         <Border Background="WhiteSmoke" BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="2">
-            <Grid Name="TrayGrid">
+            <Grid Name="TrayGrid" DataContext="{Binding Path=TrayGrid, Mode=TwoWay}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="1*"/>

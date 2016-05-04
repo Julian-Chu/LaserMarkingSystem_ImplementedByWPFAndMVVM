@@ -74,11 +74,12 @@
     <Compile Include="Protocol\SettingAndRequestingIndividualPaletteConditions.cs" />
     <Compile Include="Protocol\SettingAndRequestingTitle.cs" />
     <Compile Include="Protocol\SettingCounterConditions.cs" />
+    <Compile Include="ViewModel\LaserMarkingWindowViewModel.cs" />
     <Compile Include="View\CommandConfirmWindows.xaml.cs">
       <DependentUpon>CommandConfirmWindows.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\LaserMarkerWindow.xaml.cs">
-      <DependentUpon>LaserMarkerWindow.xaml</DependentUpon>
+    <Compile Include="View\LaserMarkingWindowView.xaml.cs">
+      <DependentUpon>LaserMarkingWindowView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MessageQueue.cs" />
     <Compile Include="View\SettingSerialNumber.xaml.cs">
@@ -106,7 +107,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\LaserMarkerWindow.xaml">
+    <Page Include="View\LaserMarkingWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,9 +151,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="images\2DCode.png" />
   </ItemGroup>

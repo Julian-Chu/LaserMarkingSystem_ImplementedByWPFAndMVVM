@@ -236,7 +236,7 @@ namespace LaserMarking.View
         /// </summary>
         /// <param name="grid"></param>
 
-        #region TrayGenerator
+        #region <--TrayGenerator-->
         private void GeneratingTrayMatrix(Grid grid)
         {
             int row = grid.RowDefinitions.Count;
