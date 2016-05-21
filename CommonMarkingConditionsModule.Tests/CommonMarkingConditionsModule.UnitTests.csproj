@@ -57,9 +57,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsModule.csproj">
+    <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsWindow.csproj">
       <Project>{D680C6EA-13E2-4FD6-889D-92B5447088CB}</Project>
-      <Name>CommonMarkingConditionsModule</Name>
+      <Name>CommonMarkingConditionsWindow</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

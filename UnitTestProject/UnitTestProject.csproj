@@ -64,7 +64,7 @@
       <Project>{95527f34-369b-4f0d-939c-f0cca10216b6}</Project>
       <Name>LaserMarking</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsModule.csproj">
+    <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsWindow.csproj">
       <Project>{d680c6ea-13e2-4fd6-889d-92b5447088cb}</Project>
       <Name>CommonMarkingConditionsModule</Name>
     </ProjectReference>

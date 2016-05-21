@@ -133,7 +133,7 @@
         </Border>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
             <Button Name="BlockConditionDownload" Content="Download" Command="{Binding Path=Download}" Style="{StaticResource ButtonStyle_2}" />
-            <Button Name="BlockConditionUpload" Content="Upload" Command="{Binding Path=Upload}" Style="{StaticResource ButtonStyle_2}"/>
+            <Button Name="BlockConditionUpload" Content="Upload" Command="{Binding Path=Upload}" Style="{StaticResource ButtonStyle_2}" />
 
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">

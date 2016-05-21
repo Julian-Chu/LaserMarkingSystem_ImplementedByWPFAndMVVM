@@ -13,7 +13,6 @@ namespace BlockConditionsWindow.View.UnitTests
     {
         BlockConditions obj;
 
-        
         [TestCase("1999")]
         [TestCase("0000")]
         public void ProgramNo_InputValueInRange_ReturnsInputValue(string input)

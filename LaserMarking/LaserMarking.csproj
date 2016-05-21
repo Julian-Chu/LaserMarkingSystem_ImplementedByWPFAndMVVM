@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -142,6 +146,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -160,9 +165,9 @@
       <Project>{36857c73-515b-4eb7-934f-ef28f0a3129a}</Project>
       <Name>BlockConditionsWindow</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsModule.csproj">
+    <ProjectReference Include="..\ProgramNoSetting\CommonMarkingConditionsWindow.csproj">
       <Project>{d680c6ea-13e2-4fd6-889d-92b5447088cb}</Project>
-      <Name>CommonMarkingConditionsModule</Name>
+      <Name>CommonMarkingConditionsWindow</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
