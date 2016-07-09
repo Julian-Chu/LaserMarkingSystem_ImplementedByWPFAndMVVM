@@ -16,6 +16,7 @@ namespace BlockConditionsWindow.Model
         readonly public string HeaderToRequestBlockCondition = "K3";
         readonly public char Delimiter = '\r';
 
+        #region -- Properties and Fields
         private string _programNo = "0";
         public string ProgramNo
         {
@@ -843,6 +844,8 @@ namespace BlockConditionsWindow.Model
             set { _characterStringInformation = value; NotifyPropertyChanged(); }
         }
 
+        #endregion
+
         public string Setting
         {
             get
@@ -851,6 +854,7 @@ namespace BlockConditionsWindow.Model
             }
             set { }
         }
+
 
         public void SortBlockConditions(string ReturnedBlockConditions)
         {

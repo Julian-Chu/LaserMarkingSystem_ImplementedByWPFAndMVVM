@@ -20,35 +20,25 @@ namespace CommonMarkingConditionsModule.View
     /// </summary>
     public partial class CommonMarkingConditionsWindow : Window
     {
-        Model.CommonMarkingConditionsWithSerialPort _commonMarkingConditionsWithSerialPort;
-        public SerialPort sp;
-
-        public Model.CommonMarkingConditionsWithSerialPort CommonMarkingConditions
-        { get { return _commonMarkingConditionsWithSerialPort; } }
-
-        private string programNo;
-        public string ProgramNo
+        private ViewModel.CommonMarkingConditionsWindow_ViewModel _viewModel;
+        public ViewModel.CommonMarkingConditionsWindow_ViewModel ViewModel
         {
-            get { return programNo; }
-            set { programNo = value; }
+            get { return _viewModel; }
+            set { _viewModel = value; }
         }
 
         public CommonMarkingConditionsWindow()
         {
             InitializeComponent();
-            try
-            {
-                sp = new SerialPort("COM9", 38400, Parity.None, 8, StopBits.One);
-            }
-            catch (System.IO.IOException ex) { MessageBox.Show(ex.Message); }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            _viewModel = new ViewModel.CommonMarkingConditionsWindow_ViewModel();
+            this.DataContext = ViewModel;
         }
 
         public CommonMarkingConditionsWindow(string CurrentProgramNo,SerialPort sp)
         {
             InitializeComponent();
-            this.ProgramNo = CurrentProgramNo;
-            this.sp = sp;
+            _viewModel = new ViewModel.CommonMarkingConditionsWindow_ViewModel();
+            this.DataContext = ViewModel;
         }
 
         private void SetProgramNo_Click(object sender, RoutedEventArgs e)
@@ -56,7 +46,6 @@ namespace CommonMarkingConditionsModule.View
             int Number;
             if (int.TryParse(TBProgramNumber.Text, out Number) && Number >= 0 && Number < 10000)
             {
-                ProgramNo = TBProgramNumber.Text;
                 this.DialogResult = true;
                 this.Close();
             }
@@ -66,16 +55,6 @@ namespace CommonMarkingConditionsModule.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // markingConditions = new Protocol.CommonMarkingConditions();           
-            // markingConditionsArray = new Protocol.MarkingConditionsArray(markingConditions,sp);
-            _commonMarkingConditionsWithSerialPort = new Model.CommonMarkingConditionsWithSerialPort(sp);
-            if(ProgramNo!=null)
-            { 
-                _commonMarkingConditionsWithSerialPort.ProgramNo = this.ProgramNo;
-                TBProgramNumber.Text = _commonMarkingConditionsWithSerialPort.ProgramNo;
-            }
-            //DataContext = markingConditions;
-            this.DataContext = _commonMarkingConditionsWithSerialPort;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -88,8 +67,7 @@ namespace CommonMarkingConditionsModule.View
             var result = MessageBox.Show("Continue data downloading from controller", "Confirm Window", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                _commonMarkingConditionsWithSerialPort.DownloadMarkingConditions(TBProgramNumber.Text);                
-                
+                //_commonMarkingConditionsWithSerialPort.DownloadMarkingConditions(TBProgramNumber.Text);                
             }
         }
 
@@ -130,7 +108,7 @@ namespace CommonMarkingConditionsModule.View
 
         private void TBProgramNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _commonMarkingConditionsWithSerialPort.ProgramNo = TBProgramNumber.Text;
+            //_commonMarkingConditionsWithSerialPort.ProgramNo = TBProgramNumber.Text;
         }
     }
 }

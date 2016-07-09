@@ -53,9 +53,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\CommonMarkingConditionsWithSerialPort.cs" />
-    <Compile Include="Protocol\CommonMarkingConditions.cs" />
-    <Compile Include="Protocol\ErrorCode.cs" />
+    <Compile Include="DataAccessLayer\IKeyenceCommunication.cs" />
+    <Compile Include="Model\CommonMarkingConditions.cs" />
+    <Compile Include="Model\ErrorCode.cs" />
+    <Compile Include="ViewModel\CommomMarkingConditionsWindow_ViewModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\CommonMarkingConditionsWindow.xaml.cs">
       <DependentUpon>CommonMarkingConditionsWindow.xaml</DependentUpon>
     </Compile>
@@ -109,9 +111,7 @@
       <Name>BlockConditionsWindow</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -14,10 +14,10 @@ namespace LaserMarking
 {
     public class SerializationAndDeserialzation
     {
-        public CommonMarkingConditionsWithSerialPort commonMarkingConditions;
+        public CommonMarkingConditions commonMarkingConditions;
         public List<BlockConditions> blockConditionsList;
 
-        public SerializationAndDeserialzation(CommonMarkingConditionsWithSerialPort commonMarkingConditions,
+        public SerializationAndDeserialzation(CommonMarkingConditions commonMarkingConditions,
              List<BlockConditions> blockConditions)
         {
             this.commonMarkingConditions = commonMarkingConditions;
@@ -30,7 +30,7 @@ namespace LaserMarking
         }
 
 
-        public void Serialize(CommonMarkingConditionsWithSerialPort commonMarkingConditions, List<BlockConditions> blockConditions)
+        public void Serialize(CommonMarkingConditions commonMarkingConditions, List<BlockConditions> blockConditions)
         {
             string fileName = "LaserMarking.xml";
             string path = Path.Combine(Environment.CurrentDirectory, @"Data\", fileName);

@@ -21,7 +21,7 @@ namespace BlockConditionsWindow.ViewModel
         internal IKeyenceCommuniationService _keyenceCommunicationService;
         #endregion
 
-        #region  --DataContext Binding--
+        #region  --Data Binding--
         private Model.BlockConditions _currentblockConditionModel;
         public Model.BlockConditions CurrentblockConditionModel
         {

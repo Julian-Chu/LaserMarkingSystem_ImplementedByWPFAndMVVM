@@ -30,7 +30,7 @@ namespace LaserMarking.View
 
         static readonly object _locker = new object();
         TrayMatrix[] trayMatrix;
-        CommonMarkingConditionsModule.Model.CommonMarkingConditionsWithSerialPort _commonMarkingConditions;
+        CommonMarkingConditionsModule.Model.CommonMarkingConditions _commonMarkingConditions;
         BlockConditionsWindow.Model.BlockConditions _blockConditions;
         List<BlockConditionsWindow.Model.BlockConditions> _blockConditionsList;
 
@@ -64,7 +64,7 @@ namespace LaserMarking.View
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
             _operationWithSerialport = new Model.OperationWithSerialport(sp, LB1);
-            _commonMarkingConditions = new CommonMarkingConditionsModule.Model.CommonMarkingConditionsWithSerialPort(sp);
+            _commonMarkingConditions = new CommonMarkingConditionsModule.Model.CommonMarkingConditions();
             _blockConditions = new BlockConditionsWindow.Model.BlockConditions();
            // _blockConditionsList = new List<BlockConditionsWindow.Model.BlockConditions>();
         }
@@ -182,11 +182,11 @@ namespace LaserMarking.View
 
                 if (commonMarkingConditionsWindow.DialogResult.HasValue && commonMarkingConditionsWindow.DialogResult.Value)
                 {
-                    this.MainProgramNo.Text = commonMarkingConditionsWindow.ProgramNo;
-                    this._commonMarkingConditions = commonMarkingConditionsWindow.CommonMarkingConditions;
+                   // this.MainProgramNo.Text = commonMarkingConditionsWindow.ProgramNo;
+                    //this._commonMarkingConditions = commonMarkingConditionsWindow.CommonMarkingConditions;
 
                     ///save new program number in default file
-                    Properties.Settings.Default.ProgramNo = commonMarkingConditionsWindow.ProgramNo;
+                   // Properties.Settings.Default.ProgramNo = commonMarkingConditionsWindow.ProgramNo;
                     Properties.Settings.Default.Save();
                 }
                 else MessageBox.Show("ProgramNo Setting is cancelled!");

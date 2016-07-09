@@ -39,7 +39,7 @@ namespace BlockConditionsWindow.ViewModel
             try
             {
                 sp.Open();
-                sp.WriteLine(bCs.HeaderToSetBlockCondition + "," + bCs.ProgramNo + "," + bCs.BlockNo + "," + bCs.Setting + "," + bCs.Delimiter);
+                sp.WriteLine(bCs.HeaderToSetBlockCondition + "," + bCs.ProgramNo + "," + bCs.BlockNo + "," + bCs.Setting + bCs.Delimiter);
                 var waitingForResponce = Task.Delay(250);
                 waitingForResponce.Wait();
                 string ReturnBlockCondition = sp.ReadExisting();

@@ -19,7 +19,7 @@ namespace LaserMarking.UnitTests
         [Test()]
         public void Serialize_SerializeAndDeserialize_ReturnsTrue()
         {
-            CommonMarkingConditionsWithSerialPort _commonMarkingConditions = new CommonMarkingConditionsWithSerialPort();
+            CommonMarkingConditions _commonMarkingConditions = new CommonMarkingConditions();
             List<BlockConditions> _blockConditionsList = new List<BlockConditions>()
             {
                 new BlockConditions(),
