@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:CommonMarkingConditionsModule.View"        
         Title="ProgramNoSettingWindow" Height="480" Width="510"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Window.Resources>
         <Style x:Key="ItemStackPanelStyle" TargetType="StackPanel">
             <Setter Property="Margin" Value="1"/>

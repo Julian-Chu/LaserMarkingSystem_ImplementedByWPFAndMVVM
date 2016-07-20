@@ -41,21 +41,6 @@ namespace CommonMarkingConditionsModule.View
             this.DataContext = ViewModel;
         }
 
-        private void SetProgramNo_Click(object sender, RoutedEventArgs e)
-        {
-            int Number;
-            if (int.TryParse(TBProgramNumber.Text, out Number) && Number >= 0 && Number < 10000)
-            {
-                this.DialogResult = true;
-                this.Close();
-            }
-            else
-            { MessageBox.Show("Please input the value 0000~9999"); }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
@@ -71,44 +56,5 @@ namespace CommonMarkingConditionsModule.View
             }
         }
 
-        private void Decrement_Click(object sender, RoutedEventArgs e)
-        {
-            int result;
-            if (int.TryParse(TBProgramNumber.Text, out result) && result >= 0 && result < 2000)
-            {
-                if (result - 1 < 0) return;
-                else TBProgramNumber.Text = (result - 1).ToString("0000");
-            }
-            else
-                MessageBox.Show("Please input the value between 0000~1999");
-
-        }
-
-        private void Increment_Click(object sender, RoutedEventArgs e)
-        {
-            int result;
-            if (int.TryParse(TBProgramNumber.Text, out result) && result >= 0 && result < 2000)
-            {
-                if (result + 1 > 1999) return;
-                else TBProgramNumber.Text = (result + 1).ToString("0000");
-            }
-            else
-                MessageBox.Show("Please input the value between 0000~1999");
-        }
-
-        private void FirstProgramNo_Click(object sender, RoutedEventArgs e)
-        {
-            TBProgramNumber.Text = "0000";
-        }
-
-        private void LastProgramNo_Click(object sender, RoutedEventArgs e)
-        {
-            TBProgramNumber.Text = "1999";
-        }
-
-        private void TBProgramNumber_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //_commonMarkingConditionsWithSerialPort.ProgramNo = TBProgramNumber.Text;
-        }
     }
 }
