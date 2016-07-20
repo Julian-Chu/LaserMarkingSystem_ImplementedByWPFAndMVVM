@@ -24,7 +24,11 @@
         </Style>
     </UserControl.Resources>
         
+<<<<<<< HEAD:BlockConditions/View/PositionInformationUC/PositionInformation_1_1.xaml
     <Grid Background="White">
+=======
+    <Grid>
+>>>>>>> 529f57d9a520ad54fb73546f7a54103842f4e447:BlockConditions/View/PositionInformationUC/PositionInformation_1.xaml
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
 

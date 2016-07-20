@@ -105,11 +105,19 @@
             <Label Style="{StaticResource Label_2}">Block 3D Shape</Label>
             <TextBox Width="50" Margin="2" Text="{Binding Path=CurrentblockConditionModel.Block3DShape, Mode=OneWay}" IsEnabled="False"/>
         </StackPanel>
+<<<<<<< HEAD
         <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.Column="0" >
             <Label Style="{StaticResource Label_2}" MinWidth="70" >Block Type</Label>
             <ComboBox Name="CB_BlockType" ItemsSource="{Binding Path=BlockTypes}" SelectedItem="{Binding Path=ComboboxSelectedItem,Mode=TwoWay}" HorizontalAlignment="Left"   Margin="1" VerticalAlignment="Center" MinWidth="110" />
 
 
+=======
+        <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.Column="0">
+            <Label Style="{StaticResource Label_2}" MinWidth="80" Width="58">Block Type</Label>
+            <ComboBox Name="CB_BlockType" ItemsSource="{Binding Path=BlockTypes}" SelectedItem="{Binding Path=ComboboxSelectedItem}" HorizontalAlignment="Left"   Margin="1" VerticalAlignment="Center" MinWidth="110" />
+            
+            
+>>>>>>> 529f57d9a520ad54fb73546f7a54103842f4e447
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
@@ -133,7 +141,11 @@
         </Border>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
             <Button Name="BlockConditionDownload" Content="Download" Command="{Binding Path=Download}" Style="{StaticResource ButtonStyle_2}" />
+<<<<<<< HEAD
             <Button Name="BlockConditionUpload" Content="Upload" Command="{Binding Path=Upload}" Style="{StaticResource ButtonStyle_2}" />
+=======
+            <Button Name="BlockConditionUpload" Content="Upload" Command="{Binding Path=Upload}" Style="{StaticResource ButtonStyle_2}"/>
+>>>>>>> 529f57d9a520ad54fb73546f7a54103842f4e447
 
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">
