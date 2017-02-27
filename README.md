@@ -14,8 +14,11 @@
  <p>
  - ViewModel of main window
  - Communication between main and sub windows
+ - use DataAnnotation attribute for rule validation
+ - NLog
  - How to save parameters (using Json)
- - class diagrams
+ - full class diagrams
+ - 
  </p>
  </div>
  
